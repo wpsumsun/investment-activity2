@@ -96,33 +96,98 @@
       <swiper-slide class="swiper-item">
         <div class="item item-9">
            <div class="wenjuan">
-             <!-- <img class="wenjuanbg" src="~@/assets/images/wenjuanbg.png"> -->
+             <img class="wenjuanbg" src="~@/assets/images/wenjuanbg.png">
              <div class="row">
                <span class="name">姓名：</span>
-               <input class="input-text" type="text" maxlength="10" @blur="handleBlur">
+               <input class="input-text" type="text" maxlength="10" v-model="formData.name">
              </div>
              <div class="row">
                <span class="name">电话：</span>
-               <input class="input-text" type="tel" maxlength="">
+               <input class="input-text" type="tel" maxlength="13">
+             </div>
+             <div class="row row-special">
+               <span class="name">目前居住城市：</span>
+               <span class="address" @click="show=true" v-text="formData.address">
+                 <img class="arrow" src="~@/assets/images/arrow.png">
+               </span>
              </div>
              <div class="row">
-               <span class="name">目前居住城市：</span>
-               <span class="address" @click="show=true"></span>
+               <span class="name">详细地址：</span>
+               <input class="input-text long-input" type="text" maxlength="30">
              </div>
-             <van-popup position="bottom" v-model="show">
-               <van-area
-                  :area-list="areaList"
-                  :columns-num="3"
-                  title="123"
-                />
-             </van-popup>
+             <div class="row">
+               <span class="name">您目前从事的工作？</span>
+               <div class="radio-wrapper">
+                 <van-radio-group v-model="formData.job">
+                    <van-radio 
+                      class="radio-item"
+                      v-for="job in jobsMapping" 
+                      :key="job.value"
+                      :name="job.value"  
+                      checked-color="#1A5632">{{ job.label }}</van-radio>
+                  </van-radio-group>
+               </div>
+             </div>
+             <div class="row">
+               <span class="name">您是否有心仪的选址？</span>
+               <div class="radio-wrapper">
+                 <van-radio-group v-model="formData.hashobby">
+                    <van-radio class="radio-item" :name="true"  checked-color="#1A5632">是</van-radio>
+                    <van-radio class="radio-item" :name="false" checked-color="#1A5632">否</van-radio>
+                  </van-radio-group>
+               </div>
+             </div>
+             <div class="row">
+               <span class="name">如果创业开店的话，会以怎样的模式经营？</span>
+               <div class="radio-wrapper">
+                 <van-radio-group v-model="formData.model">
+                    <van-radio 
+                      class="radio-item"
+                      v-for="model in modelsMapping" 
+                      :key="model.value"
+                      :name="model.value"  
+                      checked-color="#1A5632">{{ model.label }}</van-radio>
+                  </van-radio-group>
+               </div>
+             </div>
+             <div class="row">
+               <span class="name">如果创业开店，您计划什么时候开始？</span>
+               <div class="radio-wrapper">
+                 <van-radio-group v-model="formData.beginTime">
+                    <van-radio 
+                      class="radio-item"
+                      v-for="date in dateMapping" 
+                      :key="date.value"
+                      :name="date.value"  
+                      checked-color="#1A5632">{{ date.label }}</van-radio>
+                  </van-radio-group>
+               </div>
+             </div>
+             <div class="row row-center">
+                <img class="submit-btn" @click="handleSubmit" src="~@/assets/images/button.png">
+              </div>
            </div>
         </div>
       </swiper-slide>
-      <swiper-slide class="swiper-item">Slide 10</swiper-slide>
+      <swiper-slide class="swiper-item">
+        <div class="item item-10">
+          <img class="jiamengbg" src="~@/assets/images/jiamengbg.png">
+          <img class="jiameng-title" src="~@/assets/images/jiameng-title.png">
+          <img class="map" src="~@/assets/images/map.gif">
+          <img class="jiameng-mobile" src="~@/assets/images/jiameng-mobile.png">
+        </div>
+      </swiper-slide>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
-    <img class="audio-img" src="~@/assets/images/music.png">
+    <img @click="handleToggle" class="audio-img" :class="{ active: isPlaying }" src="~@/assets/images/music.png">
+    <van-popup class="popover" position="bottom" v-model="show" :overlay="true">
+      <van-area
+        @confirm="handleConfirm"
+        @cancel="handleCancel"
+        :area-list="areaList"
+        :columns-num="3"/>
+    </van-popup>
+    <audio id="audio" src="http://img.tooguo.com/bgm.mp3" autoplay preload loop></audio>
   </div>
 </template>
 
@@ -131,8 +196,12 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import Popup from 'vant/lib/popup'
 import Area from 'vant/lib/area'
+import radioGroup from 'vant/lib/radio-group'
+import Radio from 'vant/lib/radio'
 import 'vant/lib/popup/style'
 import 'vant/lib/area/style'
+import 'vant/lib/radio-group/style'
+import 'vant/lib/radio/style'
 import areaList from '@/utils/area.js'
 
 export default {
@@ -142,23 +211,58 @@ export default {
     swiperSlide,
     'van-popup': Popup,
     'van-area': Area,
+    'van-radio-group': radioGroup,
+    'van-radio': Radio,
   },
   data() {
     return {
-      currentIndex: 8,
       show: false,
+      audio: '',
       areaList: areaList,
+      isPlaying: true,
+      formData: {
+        name: '',
+        mobile: '',
+        address: '',
+        detail: '',
+        job: '',
+        hashobby: '',
+        model: '',
+        beginTime: ''
+      },
+      currentIndex: 8,
       swiperOption: {
+          // noSwiping: false,
           direction: 'vertical',
           slidesPerView: 1,
-          spaceBetween: 30,
           mousewheel: true,
           preloadImages: true,
           initialSlide: 8,
+          // shortSwipes : false,
+          threshold: 15,
+          // touchMoveStopPropagation: true,
           navigation: {
             nextEl: '.swiper-button-next',
           },
-        }
+        },
+        jobsMapping: [
+          { label: '公司职工', value: 1},
+          { label: '离职创业', value: 2},
+          { label: '个体老板', value: 3},
+          { label: '其他', value: 4},
+        ],
+        modelsMapping: [
+          { label: '自己经营', value: 1},
+          { label: '家人合作', value: 2},
+          { label: '朋友合伙', value: 3},
+          { label: '雇佣管理', value: 4},
+        ],
+        dateMapping: [
+          { label: '1个月内', value: 1},
+          { label: '3个月内', value: 2},
+          { label: '半年内', value: 3},
+          { label: '暂时观望', value: 4},
+        ],
     }
   },
   computed: {
@@ -179,6 +283,10 @@ export default {
     },
   },
   mounted() {
+    var audio = document.getElementById('audio')
+      document.addEventListener("WeixinJSBridgeReady",function() {
+        audio.play() 
+      },false);
   },
   watch: {
     currentIndex(){
@@ -186,15 +294,40 @@ export default {
     },
     show() {
       if (this.show) {
-        console.log(this.$refs.mySwiper)
-        this.swiper.lockSwipes()
+        // console.log(this.$refs.mySwiper)
+        // this.swiper.lockSwipes()
         // this.$refs.mySwiper.lockSwipes()
+        // this.$set(this.swiperOption, 'threshold',  300)
       } else {
         // this.swiper.unlockSwipes()
       }
     }
   },
   methods: {
+    handleToggle() {
+      if (this.isPlaying) {
+        audio.pause()
+      } else {
+        audio.play()
+      }
+      this.isPlaying = !this.isPlaying
+    },
+    audioPlayauto() {
+      this.audio = document.getElementById('audio')
+      document.addEventListener("WeixinJSBridgeReady",function() {
+        this.audio.play() 
+      },false);
+    },
+    handleConfirm(arr) {
+      this.formData.address = arr.map(item => item.name).join(' ')
+      this.show = false
+    },
+    handleCancel() {
+      this.show = false
+    },
+    handleSubmit() {
+      console.log(this.formData)
+    },
     handleBlur() {
       // this.swiper.update()
     },
@@ -222,6 +355,17 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  .radio-item {
+    display: inline-block;
+    .van-radio__input {
+      font-size: 14px;
+    }
+    .van-radio__label {
+      margin-left: 4px;
+      margin-right: 10px;
+      font-size: 12px;
+    }
+  }
   .van-popup {
     position: absolute !important;
   }
@@ -755,13 +899,13 @@ export default {
         // margin-left: 0.1867rem;
         // margin-top: 0.4267rem;
         padding-left: 1.4133rem;
-        padding-top: 4.4rem;
+        padding-top: 3.9rem;
         box-sizing: border-box;
         .wenjuanbg {
           position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
+          left: 0.1867rem;
+          top: 0.4267rem;
+          width: 8.9733rem;
           z-index: 1;
         }
       }
@@ -771,7 +915,19 @@ export default {
         text-align: left;
         font-size: 13px;
         color: #1A5632;
-        margin-bottom: 0.6667rem;
+        margin-bottom:12px;
+        &.row-special {
+          height: 20px;
+          display: flex;
+          align-items: center;
+        }
+        &.row-center {
+          text-align: center;
+        }
+        .submit-btn {
+          width: 2.1333rem;
+          margin-left: -1.6rem;
+        }
         .input-text {
           width: 2.4533rem;
           border: none;
@@ -780,13 +936,61 @@ export default {
           border-radius: 0;
           color: #1A5632;
           font-size: 13px;
+          vertical-align: bottom;
+          &.long-input {
+            width: 4.8rem;
+          }
+        }
+        .radio-wrapper {
+          padding-top: 10px;
         }
         .address {
           display: inline-block;
+          height: 20px;
+          line-height: 20px;
           width: 4.5867rem;
           position: relative;
           border-bottom: 1px solid #1A5632;
+          font-size: 12px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          .arrow {
+            width: 0.16rem;
+            position: absolute;
+            right: 0;
+            bottom: 4px;
+          }
         }
+      }
+    }
+    &.item-10 {
+      .jiamengbg {
+        position: absolute;
+        width: 8.9733rem;
+        left: 0.1867rem;
+        top: 0.4267rem;
+      }
+      .jiameng-title {
+        position: absolute;
+        width: 7.6933rem;
+        left: 50%;
+        transform: translate(-50%);
+        top: 3.1467rem;
+      }
+      .map {
+        position: absolute;
+        width: 7.6267rem;
+        left: 50%;
+        transform: translate(-50%);
+        top: 5.5733rem;
+      }
+      .jiameng-mobile {
+        position: absolute;
+        width: 6.28rem;
+        left: 50%;
+        transform: translate(-50%);
+        top: 9.7067rem;
       }
     }
   }
@@ -826,12 +1030,21 @@ export default {
     }
   }
 }
+.audio-img {
+  &.active {
+    animation: spin 3s infinite linear;
+  }
+}
 .fadeIn {
   animation: fadeIn .7s;
 }
 @keyframes fadeIn {
   0% { opacity:0; }
   100% { opacity:1; }
+}
+@keyframes spin {
+  0% { transform: rotate(0);}
+  100% { transform: rotate(360deg);}
 }
 @keyframes slideFromRight {
   0% { left: 100%; }
