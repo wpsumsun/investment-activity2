@@ -3,6 +3,7 @@
     <swiper  
       :options="swiperOption" 
       class="swiper-box" 
+      ref="mySwiper"
       @slideNextTransitionStart="handleNextTransitionStart"
       @slidePrevTransitionStart="handlePrevTransitionStart">
       <swiper-slide class="swiper-item">
@@ -69,8 +70,55 @@
            <img class="huodong-text" :class="{ 'delay-animation-12': isSeventh }" src="~@/assets/images/huodong-text.png">
         </div>
       </swiper-slide>
-      <swiper-slide class="swiper-item">Slide 8</swiper-slide>
-      <swiper-slide class="swiper-item">Slide 9</swiper-slide>
+      <swiper-slide class="swiper-item">
+        <div class="item item-8">
+           <img class="kaidianbg" src="~@/assets/images/proceed/kaidianbg.png">
+           <img class="jiedan" :class="{ 'delay-animation-1': isEighth }" src="~@/assets/images/proceed/jiedan.png">
+           <img class="day3" :class="{ 'delay-animation-2': isEighth }" src="~@/assets/images/proceed/3.png">
+           <img class="celiang" :class="{ 'delay-animation-2': isEighth }" src="~@/assets/images/proceed/celiang.png">
+           <img class="day7-10" :class="{ 'delay-animation-3': isEighth }" src="~@/assets/images/proceed/7-10.png">
+           <img class="tuzhi" :class="{ 'delay-animation-3': isEighth }" src="~@/assets/images/proceed/tuzhi.png">
+           <img class="day2" :class="{ 'delay-animation-4': isEighth }" src="~@/assets/images/proceed/2.png">
+           <img class="baojia1" :class="{ 'delay-animation-4': isEighth }" src="~@/assets/images/proceed/baojia1.png">
+           <img class="dayx" :class="{ 'delay-animation-5': isEighth }" src="~@/assets/images/proceed/x.png">
+           <img class="yunshu" :class="{ 'delay-animation-5': isEighth }" src="~@/assets/images/proceed/yunshu.png">
+           <img class="day1-2-2" :class="{ 'delay-animation-6': isEighth }" src="~@/assets/images/proceed/1-2.png">
+           <img class="anzhuang2" :class="{ 'delay-animation-6': isEighth }" src="~@/assets/images/proceed/anzhuang2.png">
+           <img class="daogui30" :class="{ 'delay-animation-7': isEighth }" src="~@/assets/images/proceed/daogui30.png">
+           <img class="baojia2" :class="{ 'delay-animation-4': isEighth }" src="~@/assets/images/proceed/baojia2.png">
+           <img class="day25" :class="{ 'delay-animation-5': isEighth }" src="~@/assets/images/proceed/25.png">
+           <img class="daogui" :class="{ 'delay-animation-5': isEighth }" src="~@/assets/images/proceed/daogui.png">
+           <img class="day1-2" :class="{ 'delay-animation-6': isEighth }" src="~@/assets/images/proceed/1-2.png">
+           <img class="anzhuang1" :class="{ 'delay-animation-6': isEighth }" src="~@/assets/images/proceed/anzhuang1.png">
+           <img class="zhuanmaidian45" :class="{ 'delay-animation-7': isEighth }" src="~@/assets/images/proceed/zhuanmaidian45.png">
+        </div>
+      </swiper-slide>
+      <swiper-slide class="swiper-item">
+        <div class="item item-9">
+           <div class="wenjuan">
+             <!-- <img class="wenjuanbg" src="~@/assets/images/wenjuanbg.png"> -->
+             <div class="row">
+               <span class="name">姓名：</span>
+               <input class="input-text" type="text" maxlength="10" @blur="handleBlur">
+             </div>
+             <div class="row">
+               <span class="name">电话：</span>
+               <input class="input-text" type="tel" maxlength="">
+             </div>
+             <div class="row">
+               <span class="name">目前居住城市：</span>
+               <span class="address" @click="show=true"></span>
+             </div>
+             <van-popup position="bottom" v-model="show">
+               <van-area
+                  :area-list="areaList"
+                  :columns-num="3"
+                  title="123"
+                />
+             </van-popup>
+           </div>
+        </div>
+      </swiper-slide>
       <swiper-slide class="swiper-item">Slide 10</swiper-slide>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
@@ -81,23 +129,32 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import Popup from 'vant/lib/popup'
+import Area from 'vant/lib/area'
+import 'vant/lib/popup/style'
+import 'vant/lib/area/style'
+import areaList from '@/utils/area.js'
 
 export default {
   name: 'app',
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    'van-popup': Popup,
+    'van-area': Area,
   },
   data() {
     return {
-      currentIndex: 6,
+      currentIndex: 8,
+      show: false,
+      areaList: areaList,
       swiperOption: {
           direction: 'vertical',
           slidesPerView: 1,
           spaceBetween: 30,
           mousewheel: true,
           preloadImages: true,
-          initialSlide: 6,
+          initialSlide: 8,
           navigation: {
             nextEl: '.swiper-button-next',
           },
@@ -106,7 +163,7 @@ export default {
   },
   computed: {
     swiper() {
-      return this.$refs.mySwiper.swiper
+      return this.$refs.mySwiper.$el.swiper
     },
     isFifth() {
       return this.currentIndex === 4
@@ -116,16 +173,31 @@ export default {
     },
     isSeventh() {
       return this.currentIndex === 6
-    }
+    },
+    isEighth() {
+      return this.currentIndex === 7
+    },
   },
   mounted() {
   },
   watch: {
     currentIndex(){
       this.handleAnimation()
+    },
+    show() {
+      if (this.show) {
+        console.log(this.$refs.mySwiper)
+        this.swiper.lockSwipes()
+        // this.$refs.mySwiper.lockSwipes()
+      } else {
+        // this.swiper.unlockSwipes()
+      }
     }
   },
   methods: {
+    handleBlur() {
+      // this.swiper.update()
+    },
     handleNextTransitionStart() {
       this.currentIndex+=1
       console.log(this.currentIndex)
@@ -150,6 +222,12 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  .van-popup {
+    position: absolute !important;
+  }
+  .van-overlay {
+    position: absolute;
+  }
   .swiper-box {
     width: 100%;
     height: 100%;
@@ -471,6 +549,243 @@ export default {
         &.delay-animation-12 {
           animation: slideFromLeft  1s forwards;
           animation-delay: 11s;
+        }
+      }
+    }
+    &.item-8 {
+      .kaidianbg {
+        position: absolute;
+        width: 9.0933rem;
+        left: 0.1867rem;
+        top: 0.4267rem;
+      }
+      .jiedan {
+        position: absolute;
+        width: 1.96rem;
+        left: 2.08rem;
+        top: 2.88rem;
+        opacity: 0;
+        &.delay-animation-1 {
+          animation: fadeIn 3s forwards; 
+        }
+      }
+      .day3 {
+        position: absolute;
+        width: 0.4rem;
+        left: 3.8667rem;
+        top: 3.2rem;
+        opacity: 0;
+        &.delay-animation-2 {
+          animation: fadeIn 1s forwards 1s; 
+        }
+      }
+      .celiang {
+        position: absolute;
+        width: 1.9467rem;
+        left: 4.5067rem;
+        top: 2.56rem;
+        opacity: 0;
+        &.delay-animation-2 {
+          animation: fadeIn 3s forwards 1s; 
+        }
+      }
+      .day7-10 {
+        position: absolute;
+        width: 0.72rem;
+        left: 6.0533rem;
+        top: 3.44rem;
+        opacity: 0;
+        &.delay-animation-3 {
+          animation: fadeIn 1s forwards 2s; 
+        }
+      }
+      .tuzhi {
+        position: absolute;
+        width: 2.72rem;
+        left: 6.2933rem;
+        top: 4.1067rem;
+        opacity: 0;
+        &.delay-animation-3 {
+          animation: fadeIn 3s forwards 2s; 
+        }
+      }
+      .day2 {
+        position: absolute;
+        width: 0.4rem;
+        left: 5.8667rem;
+        top: 5.5467rem;
+        opacity: 0;
+        &.delay-animation-4 {
+          animation: fadeIn 1s forwards 3s; 
+        }
+      }
+      .baojia1 {
+        position: absolute;
+        width: 2.2533rem;
+        left: 3.9733rem;
+        top: 5.36rem;
+        opacity: 0;
+        &.delay-animation-4 {
+          animation: fadeIn 3s forwards 3s; 
+        }
+      }
+      .dayx {
+        position: absolute;
+        width: 0.4533rem;
+        left: 3.12rem;
+        top: 5.8933rem;
+        opacity: 0;
+        &.delay-animation-5 {
+          animation: fadeIn 1s forwards 4s; 
+        }
+      }
+      .yunshu {
+        position: absolute;
+        width: 2.4667rem;
+        left: 1.1733rem;
+        top: 5.4933rem;
+        opacity: 0;
+        &.delay-animation-5 {
+          animation: fadeIn 3s forwards 4s; 
+        }
+      }
+      .day1-2-2 {
+        position: absolute;
+        width: 0.5733rem;
+        left: 1.3333rem;
+        top: 8.1867rem;
+        opacity: 0;
+        &.delay-animation-6 {
+          animation: fadeIn 1s forwards 5s; 
+        }
+      }
+      .anzhuang2 {
+        position: absolute;
+        width: 3.92rem;
+        left: 1.9733rem;
+        top: 8rem;
+        opacity: 0;
+        &.delay-animation-6 {
+          animation: fadeIn 3s forwards 5s; 
+        }
+      }
+      .daogui30 {
+        position: absolute;
+        width: 4.56rem;
+        left: 2.1333rem;
+        top: 10.2667rem;
+        opacity: 0;
+        &.delay-animation-7 {
+          animation: fadeIn 3s forwards 6s; 
+        }
+      }
+      .baojia2 {
+        position: absolute;
+        width: 3.5333rem;
+        left: 5.7333rem;
+        top: 7.3867rem;
+        opacity: 0;
+        &.delay-animation-4 {
+          animation: fadeIn 3s forwards 3s; 
+        }
+      }
+      .day25 {
+        position: absolute;
+        width: 0.52rem;
+        left: 7.4133rem;
+        top: 8.7733rem;
+        opacity: 0;
+        &.delay-animation-5 {
+          animation: fadeIn 1s forwards 4s; 
+        }
+      }
+      .daogui {
+        position: absolute;
+        width: 2.4667rem;
+        left: 6.9333rem;
+        top: 9.3867rem;
+        opacity: 0;
+        &.delay-animation-5 {
+          animation: fadeIn 3s forwards 4s; 
+        }
+      }
+      .day1-2 {
+        position: absolute;
+        width: 0.5733rem;
+        left: 1.3333rem;
+        top: 8.1867rem;
+        opacity: 0;
+        &.delay-animation-6 {
+          animation: fadeIn 1s forwards 5s; 
+        }
+      }
+      .anzhuang1 {
+        position: absolute;
+        width: 3.92rem;
+        left: 5.2533rem;
+        top: 12.88rem;
+        opacity: 0;
+        &.delay-animation-6 {
+          animation: fadeIn 3s forwards 5s; 
+        }
+      }
+      .day1-2 {
+        position: absolute;
+        width: 0.5733rem;
+        left: 7.7333rem;
+        top: 12.3467rem;
+      }
+      .zhuanmaidian45 {
+        position: absolute;
+        width: 3.84rem;
+        left: 1.1733rem;
+        top: 12.72rem;
+        opacity: 0;
+        &.delay-animation-7 {
+          animation: fadeIn 3s forwards 6s; 
+        }
+      }
+    }
+    &.item-9 {
+      .wenjuan {
+        position: relative;
+        // width: 8.9733rem;
+        width: 100%;
+        height: 100%;
+        // margin-left: 0.1867rem;
+        // margin-top: 0.4267rem;
+        padding-left: 1.4133rem;
+        padding-top: 4.4rem;
+        box-sizing: border-box;
+        .wenjuanbg {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          z-index: 1;
+        }
+      }
+      .row {
+        position: relative;
+        z-index: 12;
+        text-align: left;
+        font-size: 13px;
+        color: #1A5632;
+        margin-bottom: 0.6667rem;
+        .input-text {
+          width: 2.4533rem;
+          border: none;
+          border-bottom: 1px solid #1A5632;
+          background: transparent;
+          border-radius: 0;
+          color: #1A5632;
+          font-size: 13px;
+        }
+        .address {
+          display: inline-block;
+          width: 4.5867rem;
+          position: relative;
+          border-bottom: 1px solid #1A5632;
         }
       }
     }
