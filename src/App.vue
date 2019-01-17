@@ -360,7 +360,7 @@ export default {
         top: 3.4667rem;
         left: 100%;
         &.delay-animation-1 {
-          animation: slideFromRight 1s forwards;
+          animation: slideFromRight 1s forwards ease-in-out;
         }
       }
       .jiamengfei-text {
@@ -525,5 +525,28 @@ export default {
 @keyframes slideFromLeft {
   0% { right: 100%; }
   100% { right: 6.4rem; }
+}
+@keyframes shake {
+  from,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  50%,
+  70%,
+  90% {
+    -webkit-transform: translate3d(-2px, 0, 0);
+    transform: translate3d(-2px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    -webkit-transform: translate3d(2px, 0, 0);
+    transform: translate3d(2px, 0, 0);
+  }
 }
 </style>
