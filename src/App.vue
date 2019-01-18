@@ -99,11 +99,11 @@
              <img class="wenjuanbg" src="~@/assets/images/wenjuanbg.png">
              <div class="row">
                <span class="name">姓名：</span>
-               <input class="input-text" type="text" maxlength="10" v-model="formData.name">
+               <input @blur="handleBlur" class="input-text" type="text" maxlength="10" v-model="formData.name">
              </div>
              <div class="row">
                <span class="name">电话：</span>
-               <input class="input-text" type="tel" maxlength="11" v-model="formData.phone">
+               <input @blur="handleBlur" class="input-text" type="tel" maxlength="11" v-model="formData.phone">
              </div>
              <div class="row row-special">
                <span class="name">目前居住城市：</span>
@@ -187,7 +187,7 @@
         :area-list="areaList"
         :columns-num="3"/>
     </van-popup>
-    <audio id="audio" src="http://img.tooguo.com/bgm.mp3" autoplay preload loop></audio>
+    <audio id="audio" :src="audioPath" autoplay preload loop></audio>
   </div>
 </template>
 
@@ -220,6 +220,7 @@ export default {
   data() {
     return {
       show: false,
+      audioPath: require('./assets/video/bgm2.mp3'),
       audio: '',
       areaList: areaList,
       isPlaying: true,
@@ -239,10 +240,10 @@ export default {
           direction: 'vertical',
           slidesPerView: 1,
           mousewheel: true,
-          preloadImages: true,
-          initialSlide: 0,
+          // preloadImages: true,
+          initialSlide: 0 ,
           // shortSwipes : false,
-          threshold: 15,
+          threshold: 10,
           // touchMoveStopPropagation: true,
           navigation: {
             nextEl: '.swiper-button-next',
@@ -295,21 +296,6 @@ export default {
       document.addEventListener("WeixinJSBridgeReady",function() {
         audio.play() 
       },false);
-  },
-  watch: {
-    currentIndex(){
-      this.handleAnimation()
-    },
-    show() {
-      if (this.show) {
-        // console.log(this.$refs.mySwiper)
-        // this.swiper.lockSwipes()
-        // this.$refs.mySwiper.lockSwipes()
-        // this.$set(this.swiperOption, 'threshold',  300)
-      } else {
-        // this.swiper.unlockSwipes()
-      }
-    }
   },
   methods: {
     handleToggle() {
@@ -388,19 +374,16 @@ export default {
     },
     handleBlur() {
       // this.swiper.update()
+      setTimeout(function() {
+                var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop || 0;
+                window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+        }, 100);
     },
     handleNextTransitionStart() {
       this.currentIndex+=1
-      console.log(this.currentIndex)
     },
     handlePrevTransitionStart() {
       this.currentIndex-=1
-      console.log(this.currentIndex)
-    },
-    handleAnimation() {
-      if (this.currentIndex === 5) {
-        console.log('动画开始')
-      }
     },
   }
 }
@@ -424,12 +407,12 @@ export default {
       font-size: 12px;
     }
   }
-  .van-popup {
-    position: absolute !important;
-  }
-  .van-overlay {
-    position: absolute;
-  }
+  // .van-popup {
+  //   position: absolute !important;
+  // }
+  // .van-overlay {
+  //   position: absolute;
+  // }
   .swiper-box {
     width: 100%;
     height: 100%;
@@ -469,14 +452,14 @@ export default {
         position: absolute;
         top: 6.1333rem;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-46%);
       }
       .taijini {
         width: 96%;
         position: absolute;
         top: 8.8rem;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-48%);
       }
     }
     &.item-2 {
@@ -506,7 +489,7 @@ export default {
         position: absolute;
         width: 7.1733rem;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-47%);
         top: 2.2667rem;
       }
       .group {
@@ -729,7 +712,7 @@ export default {
         left: 100%;
         top: 9.9467rem;
         &.delay-animation-10 {
-          animation: slideFromRight  1s forwards;
+          animation: slideFromRight2  1s forwards;
           animation-delay: 9s;
         }
       }
@@ -749,7 +732,7 @@ export default {
         top: 11.4933rem;
         right: 100%;
         &.delay-animation-12 {
-          animation: slideFromLeft  1s forwards;
+          animation: slideFromLeft2  1s forwards;
           animation-delay: 11s;
         }
       }
@@ -973,7 +956,7 @@ export default {
         text-align: left;
         font-size: 13px;
         color: #1A5632;
-        margin-bottom:12px;
+        margin-bottom:10px;
         &.row-special {
           height: 20px;
           display: flex;
@@ -1057,7 +1040,7 @@ export default {
       top: auto;
       width: 40px;
       height: 40px;;
-      bottom: 20px !important;
+      bottom: 8px !important;
       margin-left: -22px;
       // background: #fff;
       border-radius: 50%;
@@ -1108,9 +1091,17 @@ export default {
   0% { left: 100%; }
   100% { left: 6.4rem; }
 }
+@keyframes slideFromRight2 {
+  0% { left: 100%; }
+  100% { left: 6.3rem; }
+}
 @keyframes slideFromLeft {
   0% { right: 100%; }
   100% { right: 6.4rem; }
+}
+@keyframes slideFromLeft2 {
+  0% { right: 100%; }
+  100% { right: 6.2rem; }
 }
 @keyframes shake {
   from,
