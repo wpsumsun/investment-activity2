@@ -1046,6 +1046,7 @@ export default {
       border-radius: 50%;
       background-image: url('~@/assets/images/next.png');
       background-size: cover;
+      opacity: 0.7;
   }
   .audio-img {
     position: absolute;
