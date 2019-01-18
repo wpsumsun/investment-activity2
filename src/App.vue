@@ -321,7 +321,7 @@ export default {
         if (this.percentage == 90) {
           clearInterval(this.timer)
         }
-      }, 500)
+      }, 200)
     },
     handleToggle() {
       if (this.isPlaying) {
