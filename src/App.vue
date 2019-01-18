@@ -1,6 +1,13 @@
 <template>
   <div id="app">
+    <div class="loading-page" v-show="isLoading">
+      <div class="loading-main">
+        <div class="text-wrapper">Loading...</div>
+        <Progress :percentage="percentage" :stroke-width="10" color="#638c0b"></Progress>     
+      </div>
+    </div>
     <swiper  
+      v-show="!isLoading"
       :options="swiperOption" 
       class="swiper-box" 
       ref="mySwiper"
@@ -179,7 +186,7 @@
       </swiper-slide>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
-    <img @click="handleToggle" class="audio-img" :class="{ active: isPlaying }" src="~@/assets/images/music.png">
+    <img v-show="!isLoading" @click="handleToggle" class="audio-img" :class="{ active: isPlaying }" src="~@/assets/images/music.png">
     <van-popup class="popover" position="bottom" v-model="show" :overlay="true">
       <van-area
         @confirm="handleConfirm"
@@ -205,6 +212,7 @@ import 'vant/lib/radio-group/style'
 import 'vant/lib/radio/style'
 import 'vant/lib/toast/style'
 import areaList from '@/utils/area.js'
+import Progress from '@/components/progress'
 
 export default {
   name: 'app',
@@ -216,9 +224,12 @@ export default {
     'van-radio-group': radioGroup,
     'van-radio': Radio,
     'van-toast': Toast,
+    Progress
   },
   data() {
     return {
+      percentage: 0,
+      isLoading: true,
       show: false,
       audioPath: require('./assets/video/bgm2.mp3'),
       audio: '',
@@ -234,13 +245,14 @@ export default {
         model: '',
         planStart: ''
       },
+      timer: null,
       currentIndex: 0,
       swiperOption: {
           // noSwiping: false,
           direction: 'vertical',
           slidesPerView: 1,
           mousewheel: true,
-          // preloadImages: true,
+          preloadImages: true,
           initialSlide: 0 ,
           // shortSwipes : false,
           threshold: 10,
@@ -248,11 +260,15 @@ export default {
           navigation: {
             nextEl: '.swiper-button-next',
           },
-          // on: {
-          //   imagesReady: function(){
-          //     alert('图片加载完成了');
-          //   }, 
-          // },
+          on: {
+            imagesReady: ()=>{
+              this.percentage = 100
+              clearInterval(this.timer)
+              setTimeout(()=>{
+                this.isLoading = false
+              }, 200)
+            }, 
+          },
         },
         jobsMapping: [
           { label: '公司职工', value: 1},
@@ -292,12 +308,21 @@ export default {
     },
   },
   mounted() {
-    var audio = document.getElementById('audio')
+      var audio = document.getElementById('audio')
       document.addEventListener("WeixinJSBridgeReady",function() {
         audio.play() 
       },false);
+      this.handleProgress()
   },
   methods: {
+    handleProgress() {
+      this.timer = setInterval(() => {
+        this.percentage +=1
+        if (this.percentage == 90) {
+          clearInterval(this.timer)
+        }
+      }, 500)
+    },
     handleToggle() {
       if (this.isPlaying) {
         audio.pause()
@@ -320,7 +345,6 @@ export default {
       this.show = false
     },
     handleSubmit() {
-      console.log(this.formData)
       if (!this.formData.name) {
         Toast({ message: '请填写姓名', duration: 1500 });
         return
@@ -396,6 +420,25 @@ export default {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  background: #e5f4ec;
+  .loading-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .text-wrapper {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #1A5632;
+      margin-bottom: 8px;
+    }
+    .loading-main {
+      width: 60%;
+      height: 100px;
+    }
+  }
   .radio-item {
     display: inline-block;
     .van-radio__input {
@@ -652,7 +695,7 @@ export default {
         top: 5.68rem;
         right: 100%;
         &.delay-animation-4 {
-          animation: slideFromLeft  1s forwards;
+          animation: slideFromLeft3  1s forwards;
           animation-delay: 3s;
         }
       }
@@ -692,7 +735,7 @@ export default {
         top: 8.5867rem;
         right: 100%;
         &.delay-animation-8 {
-          animation: slideFromLeft  1s forwards;
+          animation: slideFromLeft4  1s forwards;
           animation-delay: 7s;
         }
       }
@@ -961,6 +1004,7 @@ export default {
           height: 20px;
           display: flex;
           align-items: center;
+          margin-top: 15px;
         }
         &.row-center {
           text-align: center;
@@ -1016,7 +1060,7 @@ export default {
         position: absolute;
         width: 7.6933rem;
         left: 50%;
-        transform: translate(-50%);
+        transform: translate(-48%);
         top: 3.1467rem;
       }
       .map {
@@ -1102,7 +1146,15 @@ export default {
 }
 @keyframes slideFromLeft2 {
   0% { right: 100%; }
-  100% { right: 6.2rem; }
+  100% { right: 5.9rem; }
+}
+@keyframes slideFromLeft3 {
+  0% { right: 100%; }
+  100% { right: 6.6rem; }
+}
+@keyframes slideFromLeft4 {
+  0% { right: 100%; }
+  100% { right: 6.35rem; }
 }
 @keyframes shake {
   from,
