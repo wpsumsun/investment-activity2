@@ -224,7 +224,7 @@ export default {
     'van-radio-group': radioGroup,
     'van-radio': Radio,
     'van-toast': Toast,
-    Progress
+    Progress,
   },
   data() {
     return {
