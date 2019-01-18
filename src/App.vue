@@ -38,8 +38,8 @@
            <img class="yingkuibg" src="~@/assets/images/yingkuibg.png">
            <img class="shouru animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/shouru.png">
            <img class="chengben animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/cehngben.png">
-           <img class="zujin animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin.jpg">
-           <img class="zujin2 animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin.jpg">
+           <img class="zujin animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin.png">
+           <img class="zujin2 animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin2.png">
            <img class="yuejingli animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/yuejingli.png">
         </div>
       </swiper-slide>
@@ -103,17 +103,17 @@
              </div>
              <div class="row">
                <span class="name">电话：</span>
-               <input class="input-text" type="tel" maxlength="13">
+               <input class="input-text" type="tel" maxlength="11" v-model="formData.phone">
              </div>
              <div class="row row-special">
                <span class="name">目前居住城市：</span>
-               <span class="address" @click="show=true" v-text="formData.address">
+               <span class="address" @click="show=true" v-text="formData.city">
                  <img class="arrow" src="~@/assets/images/arrow.png">
                </span>
              </div>
              <div class="row">
                <span class="name">详细地址：</span>
-               <input class="input-text long-input" type="text" maxlength="30">
+               <input @blur="handleBlur" class="input-text long-input" type="text" maxlength="30" v-model="formData.detailedAddress">
              </div>
              <div class="row">
                <span class="name">您目前从事的工作？</span>
@@ -123,7 +123,7 @@
                       class="radio-item"
                       v-for="job in jobsMapping" 
                       :key="job.value"
-                      :name="job.value"  
+                      :name="job.label"  
                       checked-color="#1A5632">{{ job.label }}</van-radio>
                   </van-radio-group>
                </div>
@@ -131,9 +131,9 @@
              <div class="row">
                <span class="name">您是否有心仪的选址？</span>
                <div class="radio-wrapper">
-                 <van-radio-group v-model="formData.hashobby">
-                    <van-radio class="radio-item" :name="true"  checked-color="#1A5632">是</van-radio>
-                    <van-radio class="radio-item" :name="false" checked-color="#1A5632">否</van-radio>
+                 <van-radio-group v-model="formData.favoriteAddress">
+                    <van-radio class="radio-item" name="是"  checked-color="#1A5632">是</van-radio>
+                    <van-radio class="radio-item" name="否" checked-color="#1A5632">否</van-radio>
                   </van-radio-group>
                </div>
              </div>
@@ -145,7 +145,7 @@
                       class="radio-item"
                       v-for="model in modelsMapping" 
                       :key="model.value"
-                      :name="model.value"  
+                      :name="model.label"  
                       checked-color="#1A5632">{{ model.label }}</van-radio>
                   </van-radio-group>
                </div>
@@ -153,12 +153,12 @@
              <div class="row">
                <span class="name">如果创业开店，您计划什么时候开始？</span>
                <div class="radio-wrapper">
-                 <van-radio-group v-model="formData.beginTime">
+                 <van-radio-group v-model="formData.planStart">
                     <van-radio 
                       class="radio-item"
                       v-for="date in dateMapping" 
                       :key="date.value"
-                      :name="date.value"  
+                      :name="date.label"  
                       checked-color="#1A5632">{{ date.label }}</van-radio>
                   </van-radio-group>
                </div>
@@ -198,10 +198,12 @@ import Popup from 'vant/lib/popup'
 import Area from 'vant/lib/area'
 import radioGroup from 'vant/lib/radio-group'
 import Radio from 'vant/lib/radio'
+import Toast from 'vant/lib/toast'
 import 'vant/lib/popup/style'
 import 'vant/lib/area/style'
 import 'vant/lib/radio-group/style'
 import 'vant/lib/radio/style'
+import 'vant/lib/toast/style'
 import areaList from '@/utils/area.js'
 
 export default {
@@ -213,6 +215,7 @@ export default {
     'van-area': Area,
     'van-radio-group': radioGroup,
     'van-radio': Radio,
+    'van-toast': Toast,
   },
   data() {
     return {
@@ -222,28 +225,33 @@ export default {
       isPlaying: true,
       formData: {
         name: '',
-        mobile: '',
-        address: '',
-        detail: '',
+        phone: '',
+        city: '',
+        favoriteAddress: '',
+        detailedAddress: '',
         job: '',
-        hashobby: '',
         model: '',
-        beginTime: ''
+        planStart: ''
       },
-      currentIndex: 8,
+      currentIndex: 0,
       swiperOption: {
           // noSwiping: false,
           direction: 'vertical',
           slidesPerView: 1,
           mousewheel: true,
           preloadImages: true,
-          initialSlide: 8,
+          initialSlide: 0,
           // shortSwipes : false,
           threshold: 15,
           // touchMoveStopPropagation: true,
           navigation: {
             nextEl: '.swiper-button-next',
           },
+          // on: {
+          //   imagesReady: function(){
+          //     alert('图片加载完成了');
+          //   }, 
+          // },
         },
         jobsMapping: [
           { label: '公司职工', value: 1},
@@ -319,7 +327,7 @@ export default {
       },false);
     },
     handleConfirm(arr) {
-      this.formData.address = arr.map(item => item.name).join(' ')
+      this.formData.city = arr.map(item => item.name).join(' ')
       this.show = false
     },
     handleCancel() {
@@ -327,6 +335,56 @@ export default {
     },
     handleSubmit() {
       console.log(this.formData)
+      if (!this.formData.name) {
+        Toast({ message: '请填写姓名', duration: 1500 });
+        return
+      }
+      if (!this.formData.phone || !(/^1[3|4|5|7|8]\d{9}$/.test(this.formData.phone))) {
+        Toast({ message: '请填写正确的手机号', duration: 1500 });
+        return
+      }
+      if (!this.formData.city) {
+        Toast({ message: '请选择目前居住城市', duration: 1500 });
+        return
+      }
+      if (!this.formData.detailedAddress) {
+        Toast({ message: '请填写详细地址', duration: 1500 });
+        return
+      }
+      if (!this.formData.job) {
+        Toast({ message: '请选择目前从事的工作', duration: 1500 });
+        return
+      }
+      if (!this.formData.favoriteAddress) {
+        Toast({ message: '请选择是否有心仪的选址', duration: 1500 });
+        return
+      }
+      if (!this.formData.model) {
+        Toast({ message: '请选择经营模式', duration: 1500 });
+        return
+      }
+       if (!this.formData.planStart) {
+        Toast({ message: '请选择计划开始时间', duration: 1500 });
+        return
+      }
+      const xhr = new XMLHttpRequest()
+      const url = 'http://iopewx.cddapp.com/iope/youhuijuan/questionnaireSurvey'
+      const { name, phone, city, favoriteAddress, detailedAddress, job, model, planStart } = this.formData
+      const params = `name=${name}&phone=${phone}&city=${city}&favoriteAddress=${favoriteAddress}&detailedAddress=${detailedAddress}&job=${job}&model=${model}&planStart=${planStart}`
+      xhr.open( 'POST', url)
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4 || xhr.status !== 200) {
+          return
+        }
+        if(xhr.responseText === '1') {
+           Toast({ message: '提交成功', duration: 1500 });
+        } else {
+          Toast({ message: '提交失败', duration: 1500 });
+        }
+      }
+      xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.send(params);
+      // xhr.send(this.formData);
     },
     handleBlur() {
       // this.swiper.update()
