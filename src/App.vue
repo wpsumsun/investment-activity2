@@ -213,6 +213,9 @@ import 'vant/lib/radio/style'
 import 'vant/lib/toast/style'
 import areaList from '@/utils/area.js'
 import Progress from '@/components/progress'
+import wxJSSDK from 'weixin-js-sdk'
+import share from '@/utils/share.js'
+import getQuery from '@/utils/getQuery.js'
 
 export default {
   name: 'app',
@@ -235,6 +238,7 @@ export default {
       audio: '',
       areaList: areaList,
       isPlaying: true,
+      query: {},
       formData: {
         name: '',
         phone: '',
@@ -248,46 +252,52 @@ export default {
       timer: null,
       currentIndex: 0,
       swiperOption: {
-          // noSwiping: false,
-          direction: 'vertical',
-          slidesPerView: 1,
-          mousewheel: true,
-          preloadImages: true,
-          initialSlide: 0 ,
-          // shortSwipes : false,
-          threshold: 10,
-          // touchMoveStopPropagation: true,
-          navigation: {
-            nextEl: '.swiper-button-next',
-          },
-          on: {
-            imagesReady: ()=>{
-              this.percentage = 100
-              clearInterval(this.timer)
-              setTimeout(()=>{
-                this.isLoading = false
-              }, 200)
-            }, 
-          },
+        // noSwiping: false,
+        direction: 'vertical',
+        slidesPerView: 1,
+        mousewheel: true,
+        preloadImages: true,
+        initialSlide: 0 ,
+        // shortSwipes : false,
+        threshold: 10,
+        // touchMoveStopPropagation: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
         },
-        jobsMapping: [
-          { label: '公司职工', value: 1},
-          { label: '离职创业', value: 2},
-          { label: '个体老板', value: 3},
-          { label: '其他', value: 4},
-        ],
-        modelsMapping: [
-          { label: '自己经营', value: 1},
-          { label: '家人合作', value: 2},
-          { label: '朋友合伙', value: 3},
-          { label: '雇佣管理', value: 4},
-        ],
-        dateMapping: [
-          { label: '1个月内', value: 1},
-          { label: '3个月内', value: 2},
-          { label: '半年内', value: 3},
-          { label: '暂时观望', value: 4},
-        ],
+        on: {
+          imagesReady: ()=>{
+            this.percentage = 100
+            clearInterval(this.timer)
+            setTimeout(()=>{
+              this.isLoading = false
+            }, 200)
+          }, 
+        },
+      },
+      jobsMapping: [
+        { label: '公司职工', value: 1},
+        { label: '离职创业', value: 2},
+        { label: '个体老板', value: 3},
+        { label: '其他', value: 4},
+      ],
+      modelsMapping: [
+        { label: '自己经营', value: 1},
+        { label: '家人合作', value: 2},
+        { label: '朋友合伙', value: 3},
+        { label: '雇佣管理', value: 4},
+      ],
+      dateMapping: [
+        { label: '1个月内', value: 1},
+        { label: '3个月内', value: 2},
+        { label: '半年内', value: 3},
+        { label: '暂时观望', value: 4},
+      ],
+      shareInfo: {
+        title: '佰草集养美空间优势招商', // 标题
+        desc: '招商|佰草集养美空间诚邀合伙人!', // 主题
+        link: process.env.BASE_API + '/' + process.env.H5_API + '/auth/index.do', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
+        shareicon: process.env.BASE_API + '/' + process.env.H5_API + '/wechat/images/shareicon.png' // 分享图片
+      }
     }
   },
   computed: {
@@ -308,11 +318,13 @@ export default {
     },
   },
   mounted() {
+      this.query = getQuery()
       var audio = document.getElementById('audio')
       document.addEventListener("WeixinJSBridgeReady",function() {
         audio.play() 
       },false);
       this.handleProgress()
+      share(wxJSSDK, {}, this.shareInfo, this.query.openId)
   },
   methods: {
     handleProgress() {

@@ -10,7 +10,11 @@ import shareRequest from '@/utils/shareRequest.js'
   }
   openid: 团长的openid
 */
-export function wxShare (win, data, shareInfo, openid) {
+export default function wxShare (win, data, shareInfo, openid) {
+  console.log('win', win)
+  console.log('data', data)
+  console.log('shareinfo', shareInfo)
+  console.log('openid', openid)
   const myInterval = setInterval(function () {
     clearInterval(myInterval)
     shareRequestBefore(data).then(res => {

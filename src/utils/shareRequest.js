@@ -5,7 +5,7 @@ import axios from 'axios'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.BASE_API + '/' + process.env.H5_API, // api的base_url
+  baseURL: 'https://hmjwechat.jahwa.com.cn' + '/' + 'h5_kaimenhong_hmj/', // api的base_url
   timeout: 10000, // request timeout
   dataType: 'html',
   withCredentials: false
