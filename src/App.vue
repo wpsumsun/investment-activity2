@@ -295,8 +295,8 @@ export default {
       shareInfo: {
         title: '佰草集养美空间优势招商', // 标题
         desc: '招商|佰草集养美空间诚邀合伙人!', // 主题
-        link: process.env.BASE_API + '/' + process.env.H5_API + '/auth/index.do', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
-        shareicon: process.env.BASE_API + '/' + process.env.H5_API + '/wechat/images/shareicon.png' // 分享图片
+        link: 'bcjymkj.puman.cn', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
+        shareicon: require('./assets/images/share.jpg') // 分享图片
       }
     }
   },

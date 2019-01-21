@@ -10,23 +10,26 @@ import shareRequest from '@/utils/shareRequest.js'
   }
   openid: 团长的openid
 */
+const timestamp = new Date().getTime()
+const randomCode = Math.random().toString().slice(-6)
+const appId = 'wxb9c64f2107b7cd57'
+// alert('开始调用')
 export default function wxShare (win, data, shareInfo, openid) {
-  console.log('win', win)
-  console.log('data', data)
-  console.log('shareinfo', shareInfo)
-  console.log('openid', openid)
   const myInterval = setInterval(function () {
     clearInterval(myInterval)
+    console.log(shareInfo)
     shareRequestBefore(data).then(res => {
       console.log('shareRequestBefore', res)
       let result = res.data
-      if (result.state === 0) {
+      // alert('请求返回')
+      if (res.code === 0) {
+        // alert('分享')
         win.config({
-          debug: false,
-          appId: result.appId,
-          timestamp: result.timestamp,
-          nonceStr: result.nonceStr,
-          signature: result.signature,
+          debug: true,
+          appId: appId,
+          timestamp: timestamp,
+          nonceStr: randomCode,
+          signature: result.sign,
           jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'hideMenuItems', 'addCard', 'chooseCard', 'openCard']
         })
         win.ready(function () {
@@ -50,7 +53,8 @@ export default function wxShare (win, data, shareInfo, openid) {
             link: shareInfo.link,
             imgUrl: shareInfo.shareicon,
             success () {
-              share(3, openid)
+              // share(3, openid)
+              console.log('分享成功')
             },
             cancel () {
               alert('分享好友圈取消')
@@ -64,7 +68,8 @@ export default function wxShare (win, data, shareInfo, openid) {
             type: '', // 分享类型,music、video或link，不填默认为link
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success () {
-              share(4, openid)
+              // share(4, openid)
+              console.log('分享成功')
             },
             cancel () {
             }
@@ -82,7 +87,7 @@ export default function wxShare (win, data, shareInfo, openid) {
 function shareRequestBefore (data) {
   // 'Business.ashx?para=jsapi&apiurl=' + encodeURIComponent(location.href),
   return shareRequest({
-    url: '/wechat/Business.ashx?para=jsapi&apiurl=' + encodeURIComponent(location.href.split('#')[0]), // 地址
+    url: `?url=${location.href}&timestamp=${timestamp}&randomCode=${randomCode}`, // 地址
     method: 'post',
     data
   })
