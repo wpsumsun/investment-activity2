@@ -67,6 +67,7 @@ export default function wxShare (win, data, shareInfo, openid) {
               share(4, openid)
             },
             cancel () {
+              alert(2)
             }
           })
         })

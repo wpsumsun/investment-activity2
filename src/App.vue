@@ -390,7 +390,8 @@ export default {
         return
       }
       const xhr = new XMLHttpRequest()
-      const url = 'http://iopewx.cddapp.com/iope/youhuijuan/questionnaireSurvey'
+      // const url = 'http://iopewx.cddapp.com/iope/youhuijuan/questionnaireSurvey'
+      const url = 'http://iopewx.cddapp.com/iope/baicaoji/questionnaireSurvey'
       const { name, phone, city, favoriteAddress, detailedAddress, job, model, planStart } = this.formData
       const params = `name=${name}&phone=${phone}&city=${city}&favoriteAddress=${favoriteAddress}&detailedAddress=${detailedAddress}&job=${job}&model=${model}&planStart=${planStart}`
       xhr.open( 'POST', url)
