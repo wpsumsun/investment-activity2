@@ -24,20 +24,20 @@
       <swiper-slide class="swiper-item">
         <div class="item item-2">
           <img class="jieshao" src="~@/assets/images/jieshao.png">
-          <img class="jieshao-detail" src="~@/assets/images/item2bg.jpg">
+          <img class="jieshao-detail" :class="{ 'delay-animation': isSecond }" src="~@/assets/images/item2bg.jpg">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
         <div class="item item-3">
            <img class="zone" src="~@/assets/images/zone.png">
            <img class="slogon" src="~@/assets/images/slogon.png">
-           <img class="group" src="~@/assets/images/group.jpg">
+           <img class="group"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group.jpg">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
         <div class="item item-4">
            <img class="title" src="~@/assets/images/title4.png">
-           <img class="tree" src="~@/assets/images/tree.png">
+           <img class="tree" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree.png">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -55,8 +55,7 @@
            <img class="jiamengbg" src="~@/assets/images/item6bg.png">
            <img class="triangle" :class="{ 'delay-animation': isSixth }" src="~@/assets/images/triangle.png">
            <img class="protocol" :class="{ 'delay-animation-1': isSixth }" src="~@/assets/images/protocol.png">
-           <img class="text" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/text.png">
-           <img class="text2" :class="{ 'delay-animation-3': isSixth }" src="~@/assets/images/text2.png">
+           <img class="circle" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/circle.png">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -118,10 +117,10 @@
                  <img class="arrow" src="~@/assets/images/arrow.png">
                </span>
              </div>
-             <div class="row">
+             <!-- <div class="row">
                <span class="name">详细地址：</span>
                <input @blur="handleBlur" class="input-text long-input" type="text" maxlength="30" v-model="formData.detailedAddress">
-             </div>
+             </div> -->
              <div class="row">
                <span class="name">您目前从事的工作？</span>
                <div class="radio-wrapper">
@@ -257,7 +256,7 @@ export default {
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 0 ,
+        initialSlide: 0,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -293,16 +292,25 @@ export default {
         { label: '暂时观望', value: 4},
       ],
       shareInfo: {
-        title: '佰草集养美空间优势招商', // 标题
+        title: '佰草集养美空间火热招商', // 标题
         desc: '招商|佰草集养美空间诚邀合伙人!', // 主题
-        link: 'bcjymkj.puman.cn', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
-        shareicon: require('./assets/images/share.jpg') // 分享图片
+        link: 'http://bcjymkj.puman.cn/', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
+        shareicon: 'http://img.puman.cn/Content/iope/baicaoji.jpg' // 分享图片
       }
     }
   },
   computed: {
     swiper() {
       return this.$refs.mySwiper.$el.swiper
+    },
+    isSecond() {
+      return this.currentIndex === 1
+    },
+    isThird() {
+      return this.currentIndex === 2
+    },
+    isFourth() {
+      return this.currentIndex === 3
     },
     isFifth() {
       return this.currentIndex === 4
@@ -369,10 +377,10 @@ export default {
         Toast({ message: '请选择目前居住城市', duration: 1500 });
         return
       }
-      if (!this.formData.detailedAddress) {
-        Toast({ message: '请填写详细地址', duration: 1500 });
-        return
-      }
+      // if (!this.formData.detailedAddress) {
+      //   Toast({ message: '请填写详细地址', duration: 1500 });
+      //   return
+      // }
       if (!this.formData.job) {
         Toast({ message: '请选择目前从事的工作', duration: 1500 });
         return
@@ -504,7 +512,7 @@ export default {
         transform: translateX(-50%);
       }
       .xiaobiaoti {
-        width: 7.4667rem;
+        width: 8rem;
         position: absolute;
         top: 6.1333rem;
         left: 50%;
@@ -532,6 +540,9 @@ export default {
         left: 50%;
         top: 2.2667rem;
         transform: translateX(-50%);
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+        }
       }
     }
     &.item-3 {
@@ -543,7 +554,7 @@ export default {
       }
       .slogon {
         position: absolute;
-        width: 7.1733rem;
+        width: 8rem;
         left: 50%;
         transform: translateX(-47%);
         top: 2.2667rem;
@@ -553,6 +564,9 @@ export default {
         width: 100%;
         left: 0;
         top: 5.3333rem;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+        }
       }
     }
     &.item-4 {
@@ -568,6 +582,9 @@ export default {
         width: 100%;
         left: 0;
         top: 2.8267rem;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+        }
       }
     }
     &.item-5 {
@@ -610,13 +627,6 @@ export default {
         left: 50%;
         margin-left: -3.8667rem;
         top: 6.08rem;
-      }
-      .triangle {
-        position: absolute;
-        width: 7.7333rem;
-        left: 50%;
-        margin-left: -3.8667rem;
-        top: 6.08rem;
         z-index: 12;
         opacity: 0;
         &.delay-animation {
@@ -635,27 +645,16 @@ export default {
           animation-delay: 1s;
         }
       }
-       .text2 {
+       .circle {
         position: absolute;
-        width: 1.8133rem;
-        left: 2.0267rem;
-        top: 7.68rem;
-        opacity: 0;
-        &.delay-animation-3 {
-          animation: fadeIn  3s forwards;
-          animation-delay: 2s;
-        }
-      }
-       .text {
-        position: absolute;
-        width: 3.68rem;
+        width: 6.76rem;
         left: 50%;
-        margin-left: -1.84rem;
-        top: 12.7733rem;
+        margin-left: -3.3867rem;
+        top: 7.6rem;
         opacity: 0;
         &.delay-animation-2 {
           animation: fadeIn  3s forwards;
-          animation-delay: 3s;
+          animation-delay: 2s;
         }
       }
     }
@@ -679,7 +678,7 @@ export default {
         top: 3.4667rem;
         left: 100%;
         &.delay-animation-1 {
-          animation: slideFromRight 1s forwards ease-in-out;
+          animation: slideFromRight 1s forwards;
         }
       }
       .jiamengfei-text {
@@ -689,7 +688,6 @@ export default {
         top: 4.1333rem;
         &.delay-animation-2 {
           animation: slideFromRight  1s forwards;
-          animation-delay: 1s;
         }
       }
        .kaidian {
@@ -699,7 +697,7 @@ export default {
         right: 100%;
         &.delay-animation-3 {
           animation: slideFromLeft  1s forwards;
-          animation-delay: 2s;
+          animation-delay: 1s;
         }
       }
        .kaidian-text {
@@ -709,7 +707,7 @@ export default {
         right: 100%;
         &.delay-animation-4 {
           animation: slideFromLeft3  1s forwards;
-          animation-delay: 3s;
+          animation-delay: 1s;
         }
       }
       .zhichi {
@@ -719,7 +717,7 @@ export default {
         left: 100%;
         &.delay-animation-5 {
           animation: slideFromRight 1s forwards;
-          animation-delay: 4s;
+          animation-delay: 2s;
         }
       }
       .zhichi-text {
@@ -729,7 +727,7 @@ export default {
         top: 7.0933rem;
         &.delay-animation-6 {
           animation: slideFromRight  1s forwards;
-          animation-delay: 5s;
+          animation-delay: 2s;
         }
       }
       .fudao {
@@ -739,7 +737,7 @@ export default {
         right: 100%;
         &.delay-animation-7 {
           animation: slideFromLeft  1s forwards;
-          animation-delay: 6s;
+          animation-delay: 3s;
         }
       }
        .fudao-text {
@@ -749,7 +747,7 @@ export default {
         right: 100%;
         &.delay-animation-8 {
           animation: slideFromLeft4  1s forwards;
-          animation-delay: 7s;
+          animation-delay: 3s;
         }
       }
       .huiyuan {
@@ -759,7 +757,7 @@ export default {
         left: 100%;
         &.delay-animation-9 {
           animation: slideFromRight 1s forwards;
-          animation-delay: 8s;
+          animation-delay: 4s;
         }
       }
       .huiyuan-text {
@@ -769,7 +767,7 @@ export default {
         top: 9.9467rem;
         &.delay-animation-10 {
           animation: slideFromRight2  1s forwards;
-          animation-delay: 9s;
+          animation-delay: 4s;
         }
       }
        .huodong {
@@ -779,7 +777,7 @@ export default {
         right: 100%;
         &.delay-animation-11 {
           animation: slideFromLeft  1s forwards;
-          animation-delay: 10s;
+          animation-delay: 5s;
         }
       }
        .huodong-text {
@@ -789,7 +787,7 @@ export default {
         right: 100%;
         &.delay-animation-12 {
           animation: slideFromLeft2  1s forwards;
-          animation-delay: 11s;
+          animation-delay: 5s;
         }
       }
     }

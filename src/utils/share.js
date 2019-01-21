@@ -10,43 +10,40 @@ import shareRequest from '@/utils/shareRequest.js'
   }
   openid: 团长的openid
 */
-const timestamp = new Date().getTime()
-const randomCode = Math.random().toString().slice(-6)
+// const timestamp = new Date().getTime()
+const timestamp = '123456'
+// const randomCode = Math.random().toString().slice(-6)
+const randomCode = '123456'
 const appId = 'wxb9c64f2107b7cd57'
-// alert('开始调用')
 export default function wxShare (win, data, shareInfo, openid) {
   const myInterval = setInterval(function () {
     clearInterval(myInterval)
-    console.log(shareInfo)
     shareRequestBefore(data).then(res => {
-      console.log('shareRequestBefore', res)
       let result = res.data
-      // alert('请求返回')
-      if (res.code === 0) {
-        // alert('分享')
+      if (result.code === 0) {
         win.config({
-          debug: true,
+          debug: false,
           appId: appId,
           timestamp: timestamp,
           nonceStr: randomCode,
-          signature: result.sign,
-          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage', 'onMenuShareQQ', 'onMenuShareWeibo', 'hideMenuItems', 'addCard', 'chooseCard', 'openCard']
+          signature: result.data.sign,
+          jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage']
         })
         win.ready(function () {
-          win.hideMenuItems({
-            menuList: [
-              'menuItem:share:qq',
-              'menuItem:share:weiboApp',
-              'menuItem:favorite',
-              'menuItem:share:facebook',
-              'menuItem:share:QZone',
-              'menuItem:copyUrl',
-              'menuItem:exposeArticle',
-              'menuItem:setFont',
-              'menuItem:openWithSafari',
-              'menuItem:openWithQQBrowser'
-            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮
-          })
+          // win.hideMenuItems({
+          //   menuList: [
+          //     'menuItem:share:qq',
+          //     'menuItem:share:weiboApp',
+          //     'menuItem:favorite',
+          //     'menuItem:share:facebook',
+          //     'menuItem:share:QZone',
+          //     'menuItem:copyUrl',
+          //     'menuItem:exposeArticle',
+          //     'menuItem:setFont',
+          //     'menuItem:openWithSafari',
+          //     'menuItem:openWithQQBrowser'
+          //   ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮
+          // })
           win.onMenuShareTimeline({ // 分享朋友圈
             title: shareInfo.title,
             desc: shareInfo.desc,
@@ -54,7 +51,6 @@ export default function wxShare (win, data, shareInfo, openid) {
             imgUrl: shareInfo.shareicon,
             success () {
               // share(3, openid)
-              console.log('分享成功')
             },
             cancel () {
               alert('分享好友圈取消')
@@ -69,7 +65,6 @@ export default function wxShare (win, data, shareInfo, openid) {
             dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
             success () {
               // share(4, openid)
-              console.log('分享成功')
             },
             cancel () {
             }
@@ -87,7 +82,7 @@ export default function wxShare (win, data, shareInfo, openid) {
 function shareRequestBefore (data) {
   // 'Business.ashx?para=jsapi&apiurl=' + encodeURIComponent(location.href),
   return shareRequest({
-    url: `?url=${location.href}&timestamp=${timestamp}&randomCode=${randomCode}`, // 地址
+    url: `?url=${encodeURIComponent(location.href)}&timestamp=${timestamp}&randomCode=${randomCode}`, // 地址
     method: 'post',
     data
   })
@@ -105,7 +100,6 @@ function shareRequestFn (data) {
 function share (type, openid) {
   if (openid !== '' || openid !== undefined) {
     shareRequestFn({type: type, openid: openid}).then(res => {
-      console.log('shareRequestFn', res)
       if (res.data.Status === 2) {
         window.location.reload()
       }
