@@ -114,8 +114,8 @@
              <div class="row row-special">
                <span class="name">目前居住城市：</span>
                <span class="address" @click="show=true" v-text="formData.city">
-                 <img class="arrow" src="~@/assets/images/arrow.png">
                </span>
+               <img class="arrow" src="~@/assets/images/arrow.png"/>
              </div>
              <!-- <div class="row">
                <span class="name">详细地址：</span>
@@ -461,12 +461,12 @@ export default {
   .radio-item {
     display: inline-block;
     .van-radio__input {
-      font-size: 14px;
+      font-size: 0.3733rem;
     }
     .van-radio__label {
       margin-left: 4px;
       margin-right: 5px;
-      font-size: 12px;
+      font-size: 0.32rem;
     }
   }
   // .van-popup {
@@ -1006,19 +1006,19 @@ export default {
         position: relative;
         z-index: 12;
         text-align: left;
-        font-size: 13px;
+        font-size: 0.3467rem;
         color: #1A5632;
         margin-bottom:10px;
         &.row-special {
-          height: 20px;
+          height: 0.5333rem;
           display: flex;
           align-items: center;
-          margin-top: 15px;
-          margin-bottom: 15px;
+          margin-top: 0.4rem;
+          margin-bottom: 0.4rem;
         }
         &.row-center {
           text-align: center;
-          margin-top: 15px;
+          margin-top: 0.3rem;
         }
         .submit-btn {
           width: 2.1333rem;
@@ -1031,33 +1031,33 @@ export default {
           background: transparent;
           border-radius: 0;
           color: #1A5632;
-          font-size: 13px;
+          font-size: 0.3467rem;
           vertical-align: bottom;
           &.long-input {
             width: 4.8rem;
           }
         }
         .radio-wrapper {
-          padding-top: 10px;
+          padding-top: 0.2667rem;
         }
         .address {
           display: inline-block;
-          height: 20px;
-          line-height: 20px;
+          height: 0.5333rem;
+          line-height: 0.5333rem;
           width: 4.5867rem;
           position: relative;
           border-bottom: 1px solid #1A5632;
-          font-size: 12px;
+          font-size: 0.32rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          .arrow {
-            width: 0.16rem;
+        }
+        .arrow {
+            width: 0.1667rem;
             position: absolute;
-            right: 0;
+            right: 1.8667rem;
             bottom: 4px;
           }
-        }
       }
     }
     &.item-10 {
