@@ -31,13 +31,24 @@
         <div class="item item-3">
            <img class="zone" src="~@/assets/images/zone.png">
            <img class="slogon" src="~@/assets/images/slogon.png">
-           <img class="group"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group.jpg">
+           <img class="group1"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group1.jpg">
+           <img class="group2"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group2.jpg">
+           <img class="group3"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group3.jpg">
+           <img class="group4"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group4.jpg">
+           <img class="group5"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group5.jpg">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
         <div class="item item-4">
            <img class="title" src="~@/assets/images/title4.png">
            <img class="tree" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree.png">
+           <img class="tree1" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree1.png">
+           <img class="tree2" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree2.png">
+           <img class="tree3" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree3.png">
+           <img class="tree4" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree4.png">
+           <img class="tree5" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree5.png">
+           <img class="tree6" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree6.png">
+           <img class="tree7" :class="{ 'delay-animation': isFourth }" src="~@/assets/images/tree7.png">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -55,7 +66,9 @@
            <img class="jiamengbg" src="~@/assets/images/item6bg.png">
            <img class="triangle" :class="{ 'delay-animation': isSixth }" src="~@/assets/images/triangle.png">
            <img class="protocol" :class="{ 'delay-animation-1': isSixth }" src="~@/assets/images/protocol.png">
-           <img class="circle" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/circle.png">
+           <img class="zuo" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/zuo.png">
+           <img class="xia" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/xia.png">
+           <img class="you" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/you.png">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -248,14 +261,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 0,
+      currentIndex: 5,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 0,
+        initialSlide: 5,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -557,13 +570,58 @@ export default {
         transform: translateX(-47%);
         top: 2.2667rem;
       }
-      .group {
+      .group1 {
         position: absolute;
-        width: 100%;
+        width: 5.9733rem;
         left: 0;
         top: 5.3333rem;
+        opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 2s forwards;
+        }
+      }
+      .group2 {
+        position: absolute;
+        width: 4.0267rem;
+        right: 0;
+        top: 5.3333rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 1s;
+        }
+      }
+      .group3 {
+        position: absolute;
+        width: 2.8533rem;
+        left: 0;
+        top: 8.9333rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 2s;
+        }
+      }
+      .group4 {
+        position: absolute;
+        width: 2.8533rem;
+        left: 0;
+        top: 11.05rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 3s;
+        }
+      }
+      .group5 {
+        position: absolute;
+        width: 7.1467rem;
+        right: 0;
+        top: 8.9333rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 4s;
         }
       }
     }
@@ -580,8 +638,86 @@ export default {
         width: 100%;
         left: 0;
         top: 2.8267rem;
+        opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 2s forwards;
+        }
+      }
+      .tree1 {
+        position: absolute;
+        width: 1.8533rem;
+        left: 3.8133rem;
+        top: 4.74rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 1s;
+        }
+      }
+      .tree2 {
+        position: absolute;
+        width: 1.84rem;
+        left: 6.1467rem;
+        top: 5.52rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 2s;
+        }
+      }
+      .tree3 {
+        position: absolute;
+        width: 2.0267rem;
+        left: 4.4rem;
+        top: 6.57rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 3s;
+        }
+      }
+      .tree4 {
+        position: absolute;
+        width: 2.3867rem;
+        left: 1.3rem;
+        top: 6.60rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 4s;
+        }
+      }
+      .tree5 {
+        position: absolute;
+        width: 2.16rem;
+        left: 3.1rem;
+        top: 8.60rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 5s;
+        }
+      }
+      .tree6 {
+        position: absolute;
+        width: 2.7467rem;
+        left: 5.73rem;
+        top: 8.75rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 6s;
+        }
+      }
+      .tree7 {
+        position: absolute;
+        width: 2.72rem;
+        left: 3.65rem;
+        top: 11.10rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 2s forwards;
+          animation-delay: 7s;
         }
       }
     }
@@ -598,18 +734,23 @@ export default {
       }
       .shouru {
         margin-top: 4.8rem;
+        animation-duration: 2s;
       }
       .chengben {
         animation-delay: 0.3s;
+        animation-duration: 2s;
       }
       .zujin {
         animation-delay: 0.5s;
+        animation-duration: 2s;
       }
       .zujin2 {
         animation-delay: 0.7s;
+        animation-duration: 2s;
       }
       .yuejingli {
         animation-delay: 0.9s;
+        animation-duration: 2s;
       }
     }
     &.item-6 {
@@ -643,16 +784,37 @@ export default {
           animation-delay: 1s;
         }
       }
-       .circle {
+       .zuo {
         position: absolute;
-        width: 6.76rem;
-        left: 50%;
-        margin-left: -3.3867rem;
-        top: 7.6rem;
+        width: 2.2933rem;
+        left: 1.5933rem;
+        top: 7.6133rem;
         opacity: 0;
         &.delay-animation-2 {
           animation: fadeIn  3s forwards;
           animation-delay: 2s;
+        }
+      }
+      .xia {
+        position: absolute;
+        width: 3.6667rem;
+        left: 3.2933rem;
+        top: 12.7133rem;
+        opacity: 0;
+        &.delay-animation-2 {
+          animation: fadeIn  3s forwards;
+          animation-delay: 3s;
+        }
+      }
+      .you {
+        position: absolute;
+        width: 2.28rem;
+        left: 6.0933rem;
+        top: 7.6133rem;
+        opacity: 0;
+        &.delay-animation-2 {
+          animation: fadeIn  3s forwards;
+          animation-delay: 4s;
         }
       }
     }
