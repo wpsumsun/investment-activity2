@@ -193,7 +193,7 @@
         :area-list="areaList"
         :columns-num="3"/>
     </van-popup>
-    <audio id="audio" :src="audioPath" autoplay preload loop></audio>
+    <audio id="audio" src="http://img.tooguo.com/bgm2.mp3" autoplay preload loop></audio>
   </div>
 </template>
 
@@ -465,7 +465,7 @@ export default {
     }
     .van-radio__label {
       margin-left: 4px;
-      margin-right: 10px;
+      margin-right: 5px;
       font-size: 12px;
     }
   }
@@ -1014,9 +1014,11 @@ export default {
           display: flex;
           align-items: center;
           margin-top: 15px;
+          margin-bottom: 15px;
         }
         &.row-center {
           text-align: center;
+          margin-top: 15px;
         }
         .submit-btn {
           width: 2.1333rem;
