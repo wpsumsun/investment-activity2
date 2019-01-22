@@ -192,7 +192,14 @@
         <div class="item item-10">
           <img class="jiamengbg" src="~@/assets/images/jiamengbg.png">
           <img class="jiameng-title" src="~@/assets/images/jiameng-title.png">
-          <img class="map" src="~@/assets/images/map.gif">
+          <img class="map" src="~@/assets/images/map.png">
+          <img 
+            v-for="(dot, dotIndex) in dots" 
+            :key="dotIndex"
+            :style="{  left: dot.left, top: dot.top, animationDuration: dot.duration }"
+            :label="dot.label"
+            class="dot" 
+            src="~@/assets/images/dot.png">
           <img class="jiameng-mobile" src="~@/assets/images/jiameng-mobile.png">
         </div>
       </swiper-slide>
@@ -261,14 +268,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 5,
+      currentIndex: 0,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 5,
+        initialSlide: 0,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -308,7 +315,36 @@ export default {
         desc: '招商|佰草集养美空间诚邀合伙人!', // 主题
         link: 'http://bcjymkj.puman.cn/', // 跳转链接 http://hmjwechattest.jahwa.com.cn/h5_dabainikanjia_bcj/auth/ShareIndex.do?fromopenid={openid}   这是自定义分享要使用的URL。注意传糁
         shareicon: 'http://img.puman.cn/Content/iope/baicaoji.jpg' // 分享图片
-      }
+      },
+      dots: [
+        {  left: '2.72rem', top: '7.52rem', duration: '8s', delay: '0s', label: '新疆'},
+        {  left: '6.16rem', top: '7.5467rem', duration: '6s', delay: '3s', label: '内蒙古'},
+        {  left: '7.8667rem', top: '6.3733rem', duration: '8s', delay: '3s', label: '黑龙江'},
+        {  left: '8rem', top: '7.0133rem', duration: '8s', delay: '5s', label: '吉林'},
+        {  left: '7.6rem', top: '7.44rem', duration: '6s', delay: '5s', label: '辽宁'},
+        {  left: '6.6667rem', top: '8.1067rem', duration: '10s', delay: '4s', label: '河北'},
+        {  left: '6.2667rem', top: '8.24rem', duration: '8s', delay: '4s', label: '山西'},
+        {  left: '7.0667rem', top: '8.3467rem', duration: '8s', delay: '2s', label: '山东'},
+        {  left: '6.48rem', top: '8.7733rem', duration: '6s', delay: '0s', label: '河南'},
+        {  left: '7.0667rem', top: '9.1467rem', duration: '10s', delay: '2s', label: '安徽'},
+        {  left: '7.4667rem', top: '8.9067rem', duration: '8s', delay: '4s', label: '江苏'},
+        {  left: '6.2933rem', top: '9.2267rem', duration: '6s', delay: '6s', label: '湖北'},
+        {  left: '6.9067rem', top: '9.7867rem', duration: '8s', delay: '8s', label: '江西'},
+        {  left: '7.2267rem', top: '10.0267rem', duration: '10s', delay: '4s', label: '福建'},
+        {  left: '7.52rem', top: '9.52rem', duration: '8s', delay: '6s', label: '浙江'},
+        {  left: '6.2933rem', top: '9.76rem', duration: '6s', delay: '8s', label: '湖南'},
+        {  left: '6.6133rem', top: '10.48rem', duration: '6s', delay: '10s', label: '广东'},
+        {  left: '5.84rem', top: '10.5067rem', duration: '6s', delay: '4s', label: '广西'},
+        {  left: '6.0267rem', top: '11.2rem', duration: '6s', delay: '4s', label: '海南'},
+        {  left: '4.6667rem', top: '10.4rem', duration: '10s', delay: '6s', label: '云南'},
+        {  left: '5.5733rem', top: '10rem', duration: '8s', delay: '6s', label: '贵州'},
+        {  left: '4.8533rem', top: '9.3333rem', duration: '6s', delay: '4s', label: '四川'},
+        {  left: '5.6533rem', top: '9.4933rem', duration: '6s', delay: '4s', label: '重庆'},
+        {  left: '3.9733rem', top: '8.5333rem', duration: '8s', delay: '0s', label: '青海'},
+        {  left: '5.1467rem', top: '8.6133rem', duration: '6s', delay: '4s', label: '甘肃'},
+        {  left: '5.3867rem', top: '8.24rem', duration: '6s', delay: '2s', label: '宁夏'},
+        {  left: '5.7867rem', top: '8.8533rem', duration: '6s', delay: '2s', label: '陕西'},
+      ]
     }
   },
   computed: {
@@ -552,7 +588,7 @@ export default {
         top: 2.2667rem;
         transform: translateX(-50%);
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 2s;
         }
       }
     }
@@ -1243,6 +1279,14 @@ export default {
         transform: translate(-50%);
         top: 5.5733rem;
       }
+      .dot {
+        width: 0.2133rem;
+        height: 0.2133rem;
+        position: absolute;
+        // left: 2.72rem;
+        // top: 7.52rem;
+        animation: flash  infinite forwards;
+      }
       .jiameng-mobile {
         position: absolute;
         width: 6.28rem;
@@ -1299,6 +1343,13 @@ export default {
 }
 @keyframes fadeIn {
   0% { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes flash {
+  0% { opacity:1; }
+  25% { opacity:0.5; }
+  50% { opacity:0; }
+  75% { opacity:0.5; }
   100% { opacity:1; }
 }
 @keyframes spin {
