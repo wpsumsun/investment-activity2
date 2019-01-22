@@ -9,23 +9,18 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "iosselect": "^1.1.5",
     "vant": "^1.5.2",
     "vue": "^2.5.21",
     "vue-awesome-swiper": "^3.1.3",
-    "vux": "^2.9.2",
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-service": "^3.3.0",
     "less": "^3.9.0",
-    "less-loader": "^4.1.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-loader": "^14.2.2",
-    "vue-template-compiler": "^2.5.21",
-    "vux-loader": "^1.2.9",
-    "yaml-loader": "^0.5.0"
+    "vue-template-compiler": "^2.5.21"
   }
 }

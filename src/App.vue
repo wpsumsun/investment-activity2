@@ -214,7 +214,6 @@ import areaList from '@/utils/area.js'
 import Progress from '@/components/progress'
 import wxJSSDK from 'weixin-js-sdk'
 import share from '@/utils/share.js'
-import getQuery from '@/utils/getQuery.js'
 
 export default {
   name: 'app',
@@ -326,13 +325,12 @@ export default {
     },
   },
   mounted() {
-      this.query = getQuery()
       var audio = document.getElementById('audio')
       document.addEventListener("WeixinJSBridgeReady",function() {
         audio.play() 
       },false);
       this.handleProgress()
-      share(wxJSSDK, {}, this.shareInfo, this.query.openId)
+      share(wxJSSDK, {}, this.shareInfo, '')
   },
   methods: {
     handleProgress() {
