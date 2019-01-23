@@ -24,7 +24,7 @@
       <swiper-slide class="swiper-item">
         <div class="item item-2">
           <img class="jieshao" src="~@/assets/images/jieshao.png">
-          <img class="jieshao-detail" :class="{ 'delay-animation': isSecond }" src="~@/assets/images/item2bg.jpg">
+          <img class="jieshao-detail" :class="{ 'delay-animation': isSecond }" src="~@/assets/images/item2bg.png">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -66,9 +66,10 @@
            <img class="jiamengbg" src="~@/assets/images/item6bg.png">
            <img class="triangle" :class="{ 'delay-animation': isSixth }" src="~@/assets/images/triangle.png">
            <img class="protocol" :class="{ 'delay-animation-1': isSixth }" src="~@/assets/images/protocol.png">
-           <img class="zuo" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/zuo.png">
+           <img class="circle" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/circle.png">
+           <!-- <img class="zuo" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/zuo.png">
            <img class="xia" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/xia.png">
-           <img class="you" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/you.png">
+           <img class="you" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/you.png"> -->
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -317,33 +318,33 @@ export default {
         shareicon: 'http://img.puman.cn/Content/iope/baicaoji.jpg' // 分享图片
       },
       dots: [
-        {  left: '2.72rem', top: '7.52rem', duration: '8s', delay: '0s', label: '新疆'},
-        {  left: '6.16rem', top: '7.5467rem', duration: '6s', delay: '3s', label: '内蒙古'},
-        {  left: '7.8667rem', top: '6.3733rem', duration: '8s', delay: '3s', label: '黑龙江'},
-        {  left: '8rem', top: '7.0133rem', duration: '8s', delay: '5s', label: '吉林'},
+        {  left: '2.72rem', top: '7.52rem', duration: '6s', delay: '0s', label: '新疆'},
+        {  left: '6.16rem', top: '7.5467rem', duration: '4s', delay: '3s', label: '内蒙古'},
+        {  left: '7.8667rem', top: '6.3733rem', duration: '6s', delay: '3s', label: '黑龙江'},
+        {  left: '8rem', top: '7.0133rem', duration: '4s', delay: '5s', label: '吉林'},
         {  left: '7.6rem', top: '7.44rem', duration: '6s', delay: '5s', label: '辽宁'},
-        {  left: '6.6667rem', top: '8.1067rem', duration: '10s', delay: '4s', label: '河北'},
-        {  left: '6.2667rem', top: '8.24rem', duration: '8s', delay: '4s', label: '山西'},
-        {  left: '7.0667rem', top: '8.3467rem', duration: '8s', delay: '2s', label: '山东'},
-        {  left: '6.48rem', top: '8.7733rem', duration: '6s', delay: '0s', label: '河南'},
-        {  left: '7.0667rem', top: '9.1467rem', duration: '10s', delay: '2s', label: '安徽'},
-        {  left: '7.4667rem', top: '8.9067rem', duration: '8s', delay: '4s', label: '江苏'},
-        {  left: '6.2933rem', top: '9.2267rem', duration: '6s', delay: '6s', label: '湖北'},
+        {  left: '6.6667rem', top: '8.1067rem', duration: '4s', delay: '4s', label: '河北'},
+        {  left: '6.2667rem', top: '8.24rem', duration: '6s', delay: '4s', label: '山西'},
+        {  left: '7.0667rem', top: '8.3467rem', duration: '4s', delay: '2s', label: '山东'},
+        {  left: '6.48rem', top: '8.7733rem', duration: '5s', delay: '0s', label: '河南'},
+        {  left: '7.0667rem', top: '9.1467rem', duration: '5s', delay: '2s', label: '安徽'},
+        {  left: '7.4667rem', top: '8.9067rem', duration: '6s', delay: '4s', label: '江苏'},
+        {  left: '6.2933rem', top: '9.2267rem', duration: '7s', delay: '6s', label: '湖北'},
         {  left: '6.9067rem', top: '9.7867rem', duration: '8s', delay: '8s', label: '江西'},
-        {  left: '7.2267rem', top: '10.0267rem', duration: '10s', delay: '4s', label: '福建'},
-        {  left: '7.52rem', top: '9.52rem', duration: '8s', delay: '6s', label: '浙江'},
-        {  left: '6.2933rem', top: '9.76rem', duration: '6s', delay: '8s', label: '湖南'},
+        {  left: '7.2267rem', top: '10.0267rem', duration: '5s', delay: '4s', label: '福建'},
+        {  left: '7.52rem', top: '9.52rem', duration: '4s', delay: '6s', label: '浙江'},
+        {  left: '6.2933rem', top: '9.76rem', duration: '5s', delay: '8s', label: '湖南'},
         {  left: '6.6133rem', top: '10.48rem', duration: '6s', delay: '10s', label: '广东'},
-        {  left: '5.84rem', top: '10.5067rem', duration: '6s', delay: '4s', label: '广西'},
-        {  left: '6.0267rem', top: '11.2rem', duration: '6s', delay: '4s', label: '海南'},
-        {  left: '4.6667rem', top: '10.4rem', duration: '10s', delay: '6s', label: '云南'},
-        {  left: '5.5733rem', top: '10rem', duration: '8s', delay: '6s', label: '贵州'},
-        {  left: '4.8533rem', top: '9.3333rem', duration: '6s', delay: '4s', label: '四川'},
-        {  left: '5.6533rem', top: '9.4933rem', duration: '6s', delay: '4s', label: '重庆'},
-        {  left: '3.9733rem', top: '8.5333rem', duration: '8s', delay: '0s', label: '青海'},
+        {  left: '5.84rem', top: '10.5067rem', duration: '7s', delay: '4s', label: '广西'},
+        {  left: '6.0267rem', top: '11.2rem', duration: '8s', delay: '4s', label: '海南'},
+        {  left: '4.6667rem', top: '10.4rem', duration: '7s', delay: '6s', label: '云南'},
+        {  left: '5.5733rem', top: '10rem', duration: '6s', delay: '6s', label: '贵州'},
+        {  left: '4.8533rem', top: '9.3333rem', duration: '5s', delay: '4s', label: '四川'},
+        {  left: '5.6533rem', top: '9.4933rem', duration: '4s', delay: '4s', label: '重庆'},
+        {  left: '3.9733rem', top: '8.5333rem', duration: '5s', delay: '0s', label: '青海'},
         {  left: '5.1467rem', top: '8.6133rem', duration: '6s', delay: '4s', label: '甘肃'},
-        {  left: '5.3867rem', top: '8.24rem', duration: '6s', delay: '2s', label: '宁夏'},
-        {  left: '5.7867rem', top: '8.8533rem', duration: '6s', delay: '2s', label: '陕西'},
+        {  left: '5.3867rem', top: '8.24rem', duration: '7s', delay: '2s', label: '宁夏'},
+        {  left: '5.7867rem', top: '8.8533rem', duration: '8s', delay: '2s', label: '陕西'},
       ]
     }
   },
@@ -609,58 +610,53 @@ export default {
       .group1 {
         position: absolute;
         width: 5.9733rem;
-        left: 0;
+        // left: -100%;
         top: 5.3333rem;
-        opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: slide2Left ease-in 1.5s forwards;
         }
       }
       .group2 {
         position: absolute;
         width: 4.0267rem;
-        right: 0;
+        right: -100%;
         top: 5.3333rem;
-        opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: slide2Right ease-in 1.5s forwards;
           animation-delay: 1s;
         }
       }
       .group3 {
         position: absolute;
         width: 2.8267rem;
-        left: 0;
+        left: -100%;
         top: 8.9333rem;
-        opacity: 0;
         z-index: 12;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: slide2Left ease-in 1.5s forwards;
           animation-delay: 2s;
         }
       }
       .group4 {
         position: absolute;
         width: 2.8533rem;
-        left: 0;
+        left: -100%;
         top: 11.78rem;
-        opacity: 0;
         z-index: 11;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
-          animation-delay: 3s;
+          animation: slide2Left ease-in 1.5s forwards;
+          animation-delay: 2s;
         }
       }
       .group5 {
         position: absolute;
         width: 7.16rem;
-        right: 0;
+        right: -100%;
         top: 8.9333rem;
-        opacity: 0;
         z-index: 9;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
-          animation-delay: 4s;
+          animation: slide2Right ease-in 1.5s forwards;
+          animation-delay: 3s;
         }
       }
     }
@@ -689,7 +685,7 @@ export default {
         top: 4.74rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 1s;
         }
       }
@@ -700,7 +696,7 @@ export default {
         top: 5.52rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 2s;
         }
       }
@@ -711,7 +707,7 @@ export default {
         top: 6.57rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 3s;
         }
       }
@@ -722,7 +718,7 @@ export default {
         top: 6.60rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 4s;
         }
       }
@@ -733,7 +729,7 @@ export default {
         top: 8.60rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 5s;
         }
       }
@@ -744,7 +740,7 @@ export default {
         top: 8.75rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 6s;
         }
       }
@@ -755,7 +751,7 @@ export default {
         top: 11.10rem;
         opacity: 0;
         &.delay-animation {
-          animation: fadeIn ease-in 2s forwards;
+          animation: fadeIn ease-in 1.5s forwards;
           animation-delay: 7s;
         }
       }
@@ -821,6 +817,18 @@ export default {
         &.delay-animation-1 {
           animation: fadeIn  3s forwards;
           animation-delay: 1s;
+        }
+      }
+      .circle {
+        position: absolute;
+        width: 6.96rem;
+        left: 50%;
+        margin-left: -3.48rem;
+        top: 7.1rem;
+        opacity: 0;
+        &.delay-animation-2 {
+          animation: fadeThenSpin  4s forwards;
+          animation-delay: 2s;
         }
       }
        .zuo {
@@ -1344,6 +1352,12 @@ export default {
 .fadeIn {
   animation: fadeIn .7s;
 }
+@keyframes fadeThenSpin {
+  0% { opacity:0; }
+  40% { opacity:1; }
+  50% { transform: rotate(0); opacity: 1; }
+  100% { transform: rotate(-360deg);opacity: 1; }
+}
 @keyframes fadeIn {
   0% { opacity:0; }
   100% { opacity:1; }
@@ -1370,6 +1384,14 @@ export default {
 @keyframes slideFromLeft {
   0% { right: 100%; }
   100% { right: 6.4rem; }
+}
+@keyframes slide2Left {
+  0% { left: -100%; }
+  100% { left: 0; }
+}
+@keyframes slide2Right {
+  0% { right: -100%; }
+  100% { right: 0; }
 }
 @keyframes slideFromLeft2 {
   0% { right: 100%; }
