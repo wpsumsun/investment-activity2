@@ -274,14 +274,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 0,
+      currentIndex: 2,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 0,
+        initialSlide: 2,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -619,7 +619,7 @@ export default {
         left: 0;
         top: 5.3333rem;
         &.delay-animation {
-          animation: slideFromTop1 ease-in 1.5s forwards;
+          animation: slideFromTop1 linear 0.8s forwards;
         }
       }
       .group2 {
@@ -628,7 +628,7 @@ export default {
         right: -100%;
         top: 5.3333rem;
         &.delay-animation {
-          animation: slide2Right ease-in 1.5s forwards;
+          animation: slide2Right ease-in 0.8s forwards;
         }
       }
       .group3 {
@@ -638,7 +638,7 @@ export default {
         top: 8.9333rem;
         z-index: 12;
         &.delay-animation {
-          animation: slide2Left ease-in 1.5s forwards;
+          animation: slide2Left ease-in 0.8s forwards;
         }
       }
       .group4 {
@@ -648,7 +648,7 @@ export default {
         top: 11.78rem;
         z-index: 11;
         &.delay-animation {
-          animation: slide2Left ease-in 1.5s forwards;
+          animation: slide2Left ease-in 0.8s forwards;
         }
       }
       .group5 {
@@ -657,7 +657,7 @@ export default {
         right: 0;
         z-index: 9;
         &.delay-animation {
-          animation: slideFromBottom1 ease-in 1.5s forwards;
+          animation: slideFromBottom1 ease-in 0.8s forwards;
         }
       }
     }
@@ -1383,19 +1383,23 @@ export default {
   100% { right: 6.4rem; }
 }
 @keyframes slide2Left {
-  0% { left: -100%; }
+  0% { left: -1.8rem; }
   100% { left: 0; }
 }
 @keyframes slideFromTop1 {
-  0% { top: -100%; }
+  0% { top: -4rem; }
+  100% { top: 5.3333rem; }
+}
+@keyframes slideFromTop2 {
+  0% { top: -3.6533rem; }
   100% { top: 5.3333rem; }
 }
 @keyframes slideFromBottom1 {
-  0% { top: 150%; }
+  0% { top: calc(100% + 5.4533rem); }
   100% { top: 8.9333rem }
 }
 @keyframes slide2Right {
-  0% { right: -100%; }
+  0% { right: -4rem; }
   100% { right: 0; }
 }
 @keyframes slideFromLeft2 {
