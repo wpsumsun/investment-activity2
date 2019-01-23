@@ -270,14 +270,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 2,
+      currentIndex: 0,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 2,
+        initialSlide: 0,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
