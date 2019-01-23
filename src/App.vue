@@ -33,8 +33,8 @@
            <img class="slogon" src="~@/assets/images/slogon.png">
            <img class="group1"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group1.jpg">
            <img class="group2"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group2.jpg">
-           <img class="group3"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group3.jpg">
-           <img class="group4"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group4.jpg">
+           <img class="group3"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group3.png">
+           <img class="group4"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group4.png">
            <img class="group5"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group5.jpg">
         </div>
       </swiper-slide>
@@ -629,10 +629,11 @@ export default {
       }
       .group3 {
         position: absolute;
-        width: 2.8533rem;
+        width: 2.8267rem;
         left: 0;
         top: 8.9333rem;
         opacity: 0;
+        z-index: 12;
         &.delay-animation {
           animation: fadeIn ease-in 2s forwards;
           animation-delay: 2s;
@@ -642,8 +643,9 @@ export default {
         position: absolute;
         width: 2.8533rem;
         left: 0;
-        top: 11.05rem;
+        top: 11.78rem;
         opacity: 0;
+        z-index: 11;
         &.delay-animation {
           animation: fadeIn ease-in 2s forwards;
           animation-delay: 3s;
@@ -651,10 +653,11 @@ export default {
       }
       .group5 {
         position: absolute;
-        width: 7.1467rem;
+        width: 7.16rem;
         right: 0;
         top: 8.9333rem;
         opacity: 0;
+        z-index: 9;
         &.delay-animation {
           animation: fadeIn ease-in 2s forwards;
           animation-delay: 4s;
