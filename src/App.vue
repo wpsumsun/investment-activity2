@@ -31,11 +31,7 @@
         <div class="item item-3">
            <img class="zone" src="~@/assets/images/zone.png">
            <img class="slogon" src="~@/assets/images/slogon.png">
-           <img class="group1"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group1.jpg">
-           <img class="group2"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group2.jpg">
-           <img class="group3"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group3.png">
-           <img class="group4"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group4.png">
-           <img class="group5"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group5.jpg">
+           <img class="group"  :class="{ 'delay-animation': isThird }" src="~@/assets/images/group.jpg">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -612,52 +608,15 @@ export default {
         transform: translateX(-47%);
         top: 2.2667rem;
       }
-      .group1 {
+      .group {
         position: absolute;
-        width: 5.9733rem;
+        width: 100%;
         // left: -100%;
         left: 0;
         top: 5.3333rem;
+        opacity: 0;
         &.delay-animation {
-          animation: slideFromTop1 linear 0.8s forwards;
-        }
-      }
-      .group2 {
-        position: absolute;
-        width: 4.0267rem;
-        right: -100%;
-        top: 5.3333rem;
-        &.delay-animation {
-          animation: slide2Right ease-in 0.8s forwards;
-        }
-      }
-      .group3 {
-        position: absolute;
-        width: 2.8267rem;
-        left: -100%;
-        top: 8.9333rem;
-        z-index: 12;
-        &.delay-animation {
-          animation: slide2Left ease-in 0.8s forwards;
-        }
-      }
-      .group4 {
-        position: absolute;
-        width: 2.8533rem;
-        left: -100%;
-        top: 11.78rem;
-        z-index: 11;
-        &.delay-animation {
-          animation: slide2Left ease-in 0.8s forwards;
-        }
-      }
-      .group5 {
-        position: absolute;
-        width: 7.16rem;
-        right: 0;
-        z-index: 9;
-        &.delay-animation {
-          animation: slideFromBottom1 ease-in 0.8s forwards;
+          animation: fadeIn ease-in 2.5s forwards;
         }
       }
     }
