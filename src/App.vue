@@ -66,10 +66,15 @@
            <img class="jiamengbg" src="~@/assets/images/item6bg.png">
            <img class="triangle" :class="{ 'delay-animation': isSixth }" src="~@/assets/images/triangle.png">
            <img class="protocol" :class="{ 'delay-animation-1': isSixth }" src="~@/assets/images/protocol.png">
-           <img class="circle" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/circle.png">
-           <!-- <img class="zuo" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/zuo.png">
-           <img class="xia" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/xia.png">
-           <img class="you" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/you.png"> -->
+           <div class="circle-wrapper" :class="{ 'delay-animation-spin': isSixth }">
+             <img class="zuo" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/zuo.png">
+           </div>
+           <div class="circle-wrapper" :class="{ 'delay-animation-spin': isSixth }">
+             <img class="xia" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/xia.png">
+           </div>
+           <div class="circle-wrapper" :class="{ 'delay-animation-spin': isSixth }">
+             <img class="you" :class="{ 'delay-animation-2': isSixth }" src="~@/assets/images/you.png">
+           </div>
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -611,9 +616,10 @@ export default {
         position: absolute;
         width: 5.9733rem;
         // left: -100%;
+        left: 0;
         top: 5.3333rem;
         &.delay-animation {
-          animation: slide2Left ease-in 1.5s forwards;
+          animation: slideFromTop1 ease-in 1.5s forwards;
         }
       }
       .group2 {
@@ -623,7 +629,6 @@ export default {
         top: 5.3333rem;
         &.delay-animation {
           animation: slide2Right ease-in 1.5s forwards;
-          animation-delay: 1s;
         }
       }
       .group3 {
@@ -634,7 +639,6 @@ export default {
         z-index: 12;
         &.delay-animation {
           animation: slide2Left ease-in 1.5s forwards;
-          animation-delay: 2s;
         }
       }
       .group4 {
@@ -645,18 +649,15 @@ export default {
         z-index: 11;
         &.delay-animation {
           animation: slide2Left ease-in 1.5s forwards;
-          animation-delay: 2s;
         }
       }
       .group5 {
         position: absolute;
         width: 7.16rem;
-        right: -100%;
-        top: 8.9333rem;
+        right: 0;
         z-index: 9;
         &.delay-animation {
-          animation: slide2Right ease-in 1.5s forwards;
-          animation-delay: 3s;
+          animation: slideFromBottom1 ease-in 1.5s forwards;
         }
       }
     }
@@ -697,7 +698,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 2s;
+          animation-delay: 1.6s;
         }
       }
       .tree3 {
@@ -708,7 +709,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 3s;
+          animation-delay: 2.2s;
         }
       }
       .tree4 {
@@ -719,7 +720,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 4s;
+          animation-delay: 2.8s;
         }
       }
       .tree5 {
@@ -730,7 +731,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 5s;
+          animation-delay: 3.4s;
         }
       }
       .tree6 {
@@ -741,7 +742,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 6s;
+          animation-delay: 4s;
         }
       }
       .tree7 {
@@ -752,7 +753,7 @@ export default {
         opacity: 0;
         &.delay-animation {
           animation: fadeIn ease-in 1.5s forwards;
-          animation-delay: 7s;
+          animation-delay: 4.6s;
         }
       }
     }
@@ -819,50 +820,44 @@ export default {
           animation-delay: 1s;
         }
       }
-      .circle {
+      .circle-wrapper {
         position: absolute;
         width: 6.96rem;
+        height: 6.96rem;
         left: 50%;
         margin-left: -3.48rem;
         top: 7.1rem;
-        opacity: 0;
-        &.delay-animation-2 {
-          animation: fadeThenSpin  4s forwards;
-          animation-delay: 2s;
+        &.delay-animation-spin {
+          animation: spinReverse  2.5s forwards;
+          animation-delay: 4.8s;
         }
-      }
-       .zuo {
-        position: absolute;
-        width: 2.2933rem;
-        left: 1.5933rem;
-        top: 7.6133rem;
-        opacity: 0;
-        &.delay-animation-2 {
-          animation: fadeIn  3s forwards;
-          animation-delay: 2s;
-        }
-      }
-      .xia {
-        position: absolute;
-        width: 3.6667rem;
-        left: 3.2933rem;
-        top: 12.7133rem;
-        opacity: 0;
-        &.delay-animation-2 {
-          animation: fadeIn  3s forwards;
-          animation-delay: 3s;
-        }
-      }
-      .you {
-        position: absolute;
-        width: 2.28rem;
-        left: 6.0933rem;
-        top: 7.6133rem;
-        opacity: 0;
-        &.delay-animation-2 {
-          animation: fadeIn  3s forwards;
-          animation-delay: 4s;
-        }
+        .zuo {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            &.delay-animation-2 {
+              animation: fadeThenSpin  2s forwards;
+              animation-delay: 2s;
+            }
+          }
+          .xia {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            &.delay-animation-2 {
+              animation: fadeThenSpin  2s forwards;
+              animation-delay: 3s;
+            }
+          }
+          .you {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            &.delay-animation-2 {
+              animation: fadeThenSpin  2s forwards;
+              animation-delay: 4s;
+            }
+          }
       }
     }
     &.item-7 {
@@ -1354,9 +1349,7 @@ export default {
 }
 @keyframes fadeThenSpin {
   0% { opacity:0; }
-  40% { opacity:1; }
-  50% { transform: rotate(0); opacity: 1; }
-  100% { transform: rotate(-360deg);opacity: 1; }
+  100% { opacity:1; }
 }
 @keyframes fadeIn {
   0% { opacity:0; }
@@ -1373,6 +1366,10 @@ export default {
   0% { transform: rotate(0);}
   100% { transform: rotate(360deg);}
 }
+@keyframes spinReverse {
+  0% { transform: rotate(0);}
+  100% { transform: rotate(-360deg);}
+}
 @keyframes slideFromRight {
   0% { left: 100%; }
   100% { left: 6.4rem; }
@@ -1388,6 +1385,14 @@ export default {
 @keyframes slide2Left {
   0% { left: -100%; }
   100% { left: 0; }
+}
+@keyframes slideFromTop1 {
+  0% { top: -100%; }
+  100% { top: 5.3333rem; }
+}
+@keyframes slideFromBottom1 {
+  0% { top: 150%; }
+  100% { top: 8.9333rem }
 }
 @keyframes slide2Right {
   0% { right: -100%; }
