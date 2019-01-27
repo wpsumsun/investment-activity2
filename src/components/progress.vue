@@ -18,9 +18,6 @@
       percentage: {
         type: Number,
 	      require: true,
-        validator(val) {
-          return val >= 0 && val <= 100
-	      }
       },
 	color: {
         type: String,
