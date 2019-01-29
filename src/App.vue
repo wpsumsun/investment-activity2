@@ -22,6 +22,11 @@
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
+        <div class="item item-11">
+          <img src="~@/assets/images/jituanjieshao.png" class="jituanjieshao">
+        </div>
+      </swiper-slide>
+      <swiper-slide class="swiper-item">
         <div class="item item-2">
           <img class="jieshao" src="~@/assets/images/jieshao.png">
           <img class="jieshao-detail" :class="{ 'delay-animation': isSecond }" src="~@/assets/images/item2bg.png">
@@ -51,9 +56,10 @@
         <div class="item item-5">
            <img class="yingkuibg" src="~@/assets/images/yingkuibg.png">
            <img class="shouru animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/shouru.png">
-           <img class="chengben animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/cehngben.png">
+           <img class="chengben animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/chengben.png">
            <img class="zujin animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin.png">
            <img class="zujin2 animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zujin2.png">
+           <img class="zafei animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/zafei.png">
            <img class="yuejingli animated" :class="{ 'bounceInRight': isFifth }" src="~@/assets/images/yuejingli.png">
         </div>
       </swiper-slide>
@@ -132,25 +138,8 @@
                </span>
                <img class="arrow" src="~@/assets/images/arrow.png"/>
              </div>
-             <!-- <div class="row">
-               <span class="name">详细地址：</span>
-               <input @blur="handleBlur" class="input-text long-input" type="text" maxlength="30" v-model="formData.detailedAddress">
-             </div> -->
              <div class="row">
-               <span class="name">您目前从事的工作？</span>
-               <div class="radio-wrapper">
-                 <van-radio-group v-model="formData.job">
-                    <van-radio 
-                      class="radio-item"
-                      v-for="job in jobsMapping" 
-                      :key="job.value"
-                      :name="job.label"  
-                      checked-color="#1A5632">{{ job.label }}</van-radio>
-                  </van-radio-group>
-               </div>
-             </div>
-             <div class="row">
-               <span class="name">您是否有心仪的选址？</span>
+               <span class="name">您是否有合适的店面资源？</span>
                <div class="radio-wrapper">
                  <van-radio-group v-model="formData.favoriteAddress">
                     <van-radio class="radio-item" name="是"  checked-color="#1A5632">是</van-radio>
@@ -254,7 +243,6 @@ export default {
       percentage: 0,
       isLoading: true,
       show: false,
-      audioPath: require('./assets/video/bgm2.mp3'),
       audio: '',
       areaList: areaList,
       isPlaying: true,
@@ -354,25 +342,25 @@ export default {
       return this.$refs.mySwiper.$el.swiper
     },
     isSecond() {
-      return this.currentIndex === 1
-    },
-    isThird() {
       return this.currentIndex === 2
     },
-    isFourth() {
+    isThird() {
       return this.currentIndex === 3
     },
-    isFifth() {
+    isFourth() {
       return this.currentIndex === 4
     },
-    isSixth() {
+    isFifth() {
       return this.currentIndex === 5
     },
-    isSeventh() {
+    isSixth() {
       return this.currentIndex === 6
     },
-    isEighth() {
+    isSeventh() {
       return this.currentIndex === 7
+    },
+    isEighth() {
+      return this.currentIndex === 8
     },
   },
   mounted() {
@@ -426,16 +414,8 @@ export default {
         Toast({ message: '请选择目前居住城市', duration: 1500 });
         return
       }
-      // if (!this.formData.detailedAddress) {
-      //   Toast({ message: '请填写详细地址', duration: 1500 });
-      //   return
-      // }
-      if (!this.formData.job) {
-        Toast({ message: '请选择目前从事的工作', duration: 1500 });
-        return
-      }
       if (!this.formData.favoriteAddress) {
-        Toast({ message: '请选择是否有心仪的选址', duration: 1500 });
+        Toast({ message: '请选择是否有合适的店面资源', duration: 1500 });
         return
       }
       if (!this.formData.model) {
@@ -725,10 +705,10 @@ export default {
       }
       >img {
         width: 7.4133rem;
-        margin-top: 0.32rem;
+        margin-top: 0.18rem;
       }
       .shouru {
-        margin-top: 4.8rem;
+        margin-top: 4.5rem;
         animation-duration: 2s;
       }
       .chengben {
@@ -743,8 +723,12 @@ export default {
         animation-delay: 0.7s;
         animation-duration: 2s;
       }
-      .yuejingli {
+      .zafei {
         animation-delay: 0.9s;
+        animation-duration: 2s;
+      }
+      .yuejingli {
+        animation-delay: 1.1s;
         animation-duration: 2s;
       }
     }
@@ -903,7 +887,7 @@ export default {
       }
        .fudao-text {
         position: absolute;
-        width: 2.8933rem;
+        width: 1.9067rem;
         top: 8.5867rem;
         right: 100%;
         &.delay-animation-8 {
@@ -1137,9 +1121,9 @@ export default {
       }
       .zhuanmaidian45 {
         position: absolute;
-        width: 3.84rem;
-        left: 1.1733rem;
-        top: 12.72rem;
+        width: 4.3867rem;
+        left: 0.7rem;
+        top: 12.42rem;
         opacity: 0;
         &.delay-animation-7 {
           animation: fadeIn 3s forwards 6s; 
@@ -1171,17 +1155,17 @@ export default {
         text-align: left;
         font-size: 0.3467rem;
         color: #1A5632;
-        margin-bottom:10px;
+        margin-bottom:15px;
         &.row-special {
           height: 0.5333rem;
           display: flex;
           align-items: center;
-          margin-top: 0.4rem;
-          margin-bottom: 0.4rem;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
         }
         &.row-center {
           text-align: center;
-          margin-top: 0.3rem;
+          margin-top: 0.6rem;
         }
         .submit-btn {
           width: 2.1333rem;
@@ -1258,6 +1242,14 @@ export default {
         left: 50%;
         transform: translate(-50%);
         top: 9.7067rem;
+      }
+    }
+    &.item-11 {
+      .jituanjieshao {
+        position: absolute;
+        width: 8.9733rem;
+        left: 0.1867rem;
+        top: 0.4267rem;
       }
     }
   }
@@ -1371,7 +1363,7 @@ export default {
 }
 @keyframes slideFromLeft4 {
   0% { right: 100%; }
-  100% { right: 6.35rem; }
+  100% { right: 7.35rem; }
 }
 @keyframes shake {
   from,
