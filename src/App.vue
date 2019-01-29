@@ -24,6 +24,19 @@
       <swiper-slide class="swiper-item">
         <div class="item item-11">
           <img src="~@/assets/images/jituanjieshao.png" class="jituanjieshao">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/jituan-text.png" class="jituan-text">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/dbx2.png" class="duobianxing1">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/yz.png" class="yz">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/tmx.png" class="tmx">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/gf.png" class="gf">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/sm.png" class="sm">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/qc.png" class="qc">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ja.png" class="ja">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ja.png" class="mjj">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/yhym.png" class="yhyj">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/bcj.png" class="bcj">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ls.png" class="ls">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/dbx.png" class="dbx">
         </div>
       </swiper-slide>
       <swiper-slide class="swiper-item">
@@ -258,14 +271,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 0,
+      currentIndex: 1,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 0,
+        initialSlide: 1,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -340,6 +353,9 @@ export default {
   computed: {
     swiper() {
       return this.$refs.mySwiper.$el.swiper
+    },
+    isFirst() {
+      return this.currentIndex === 1
     },
     isSecond() {
       return this.currentIndex === 2
@@ -1250,6 +1266,148 @@ export default {
         width: 8.9733rem;
         left: 0.1867rem;
         top: 0.4267rem;
+      }
+      .jituan-text {
+        position: absolute;
+        width: 6.8267rem;
+        left: 1.6267rem;
+        top: 4.3067rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+        }
+      }
+      .duobianxing1 {
+        position: absolute;
+        width: 0.96rem;
+        left: 0.84rem;
+        top: 9.8667rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 0.6s;
+        }
+      }
+      .yz {
+        position: absolute;
+        width: 1.64rem;
+        left: 1.4667rem;
+        top: 10.64rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 1.2s;
+        }
+      }
+      .gf {
+        position: absolute;
+        width: 1.64rem;
+        left: 2.8133rem;
+        top: 11.3867rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 3s;
+        }
+      }
+      .tmx {
+        position: absolute;
+        width: 1.64rem;
+        left: 1.4933rem;
+        top: 12.2rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 1.8s;
+        }
+      }
+      .sm {
+        position: absolute;
+        width: 1.64rem;
+        left: 2.8133rem;
+        top: 12.9733rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 2.4s;
+        }
+      }
+      .qc {
+        position: absolute;
+        width: 1.64rem;
+        left: 4.16rem;
+        top: 10.5867rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 3.6s;
+        }
+      }
+      .ja {
+        position: absolute;
+        width: 1.64rem;
+        left: 4.16rem;
+        top: 12.1467rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 3.6s;
+        }
+      }
+      .yhyj {
+        position: absolute;
+        width: 1.64rem;
+        left: 5.5333rem;
+        top: 11.36rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 3s;
+        }
+      }
+      .bcj {
+        position: absolute;
+        width: 1.64rem;
+        left: 6.88rem;
+        top: 10.5467rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 1.8s;
+        }
+      }
+      .ls {
+        position: absolute;
+        width: 1.64rem;
+        left: 6.8933rem;
+        top: 12.12rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 1.2s;
+        }
+      }
+      .dbx {
+        position: absolute;
+        width: 1.7067rem;
+        left: 8.1867rem;
+        top: 11.2933rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 0.6s;
+        }
+      }
+      .mjj {
+        position: absolute;
+        width: 1.7067rem;
+        left: 5.5333rem;
+        top: 9.8rem;
+        opacity: 0;
+        &.delay-animation {
+          animation: fadeIn ease-in 1.5s forwards;
+          animation-delay: 2.4s;
+        }
       }
     }
   }
