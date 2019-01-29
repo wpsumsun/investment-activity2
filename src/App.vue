@@ -32,7 +32,7 @@
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/sm.png" class="sm">
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/qc.png" class="qc">
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ja.png" class="ja">
-          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ja.png" class="mjj">
+          <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/mjj.png" class="mjj">
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/yhym.png" class="yhyj">
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/bcj.png" class="bcj">
           <img :class="{ 'delay-animation': isFirst }" src="~@/assets/images/ls.png" class="ls">
@@ -151,7 +151,7 @@
                </span>
                <img class="arrow" src="~@/assets/images/arrow.png"/>
              </div>
-             <div class="row">
+             <div class="row row-radios">
                <span class="name">您是否有合适的店面资源？</span>
                <div class="radio-wrapper">
                  <van-radio-group v-model="formData.favoriteAddress">
@@ -160,7 +160,7 @@
                   </van-radio-group>
                </div>
              </div>
-             <div class="row">
+             <div class="row row-radios">
                <span class="name">如果创业开店的话，会以怎样的模式经营？</span>
                <div class="radio-wrapper">
                  <van-radio-group v-model="formData.model">
@@ -173,7 +173,7 @@
                   </van-radio-group>
                </div>
              </div>
-             <div class="row">
+             <div class="row row-radios">
                <span class="name">如果创业开店，您计划什么时候开始？</span>
                <div class="radio-wrapper">
                  <van-radio-group v-model="formData.planStart">
@@ -271,14 +271,14 @@ export default {
         planStart: ''
       },
       timer: null,
-      currentIndex: 1,
+      currentIndex: 0,
       swiperOption: {
         // noSwiping: false,
         direction: 'vertical',
         slidesPerView: 1,
         mousewheel: true,
         preloadImages: true,
-        initialSlide: 1,
+        initialSlide: 0,
         // shortSwipes : false,
         threshold: 10,
         // touchMoveStopPropagation: true,
@@ -1155,7 +1155,7 @@ export default {
         // margin-left: 0.1867rem;
         // margin-top: 0.4267rem;
         padding-left: 1.4133rem;
-        padding-top: 3.9rem;
+        padding-top: 4.2rem;
         box-sizing: border-box;
         .wenjuanbg {
           position: absolute;
@@ -1179,9 +1179,12 @@ export default {
           margin-top: 0.5rem;
           margin-bottom: 0.5rem;
         }
+        &.row-radios {
+          margin-bottom: 20px;
+        }
         &.row-center {
           text-align: center;
-          margin-top: 0.6rem;
+          margin-top: 0.8rem;
         }
         .submit-btn {
           width: 2.1333rem;
